@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect} from 'react';
+import axios from 'axios';
+import './App.css';
+import { Typography, TextField, Button } from '@mui/material';
+
+
+const API = import.meta.env.VITE_BASE_URL;
+
+console.log(API)
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [prompt, setPrompt] = useState('');
+  const [response, setResponse] = useState(null);
+
+  const handleSubmit = async () => {
+    try {
+      const res = await axios.get(`${API}`, { geminiprompt: prompt });
+      console.log(res.data)
+      setResponse(res.data);
+    } catch (error) {
+      console.error('An Error occurred:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (response) {
+      console.log('Response received:', response);
+        }
+  }, [response]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div style={{ padding: '20px' }}>
+      <Typography variant="h4">Gemini AI Prompt</Typography>
+      <TextField
+        fullWidth
+        label="Enter your prompt"
+        value={prompt}
+        onChange={(e) => setPrompt(e.target.value)}
+        style={{ margin: '20px 0' }}
+      />
+      <Button variant="contained" color="secondary" onClick={handleSubmit}>
+        Generate
+      </Button>
+      {response && (
+        <div style={{ marginTop: '20px' }}>
+          <Typography variant="h5">Response:</Typography>
+          <Typography>{response}</Typography>
+        </div>
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
