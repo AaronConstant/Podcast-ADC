@@ -85,33 +85,27 @@ function App() {
         </div>
       )}
 
-      {response && !isLoading && (
-        <div style={{ marginTop: '20px' }}>
-          <Typography variant="h5">Response:</Typography>
-          <Paper elevation={10} sx={{ padding: 10 }}>
-            {/* Render the structured response */}
-            <Typography variant="h6">{response.title}</Typography>
-            <Typography variant="body1" style={{ marginTop: '10px' }}>
-              <strong>Introduction:</strong> {response.introduction}
-            </Typography>
-            <Typography variant="body1" style={{ marginTop: '10px' }}>
-              <strong>Main Content:</strong> {response.mainContent}
-            </Typography>
-            <Typography variant="body1" style={{ marginTop: '10px' }}>
-              <strong>Conclusion:</strong> {response.conclusion}
-            </Typography>
-          </Paper>
+{response && !isLoading && (
+  <div style={{ marginTop: '20px' }}>
+    <Typography variant="h5">Response:</Typography>
+    <Paper elevation={10} sx={{ padding: 10 }}>
+      {Object.entries(response).map(([key, value]) => (
+        <Typography key={key} variant="body1" style={{ marginTop: '10px' }}>
+          <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {value}
+        </Typography>
+      ))}
+    </Paper>
 
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleConvertToAudio}
-            style={{ marginTop: '20px' }}
-          >
-            Convert to Audio?
-          </Button>
-        </div>
-      )}
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={handleConvertToAudio}
+      style={{ marginTop: '20px' }}
+    >
+      Convert to Audio?
+    </Button>
+  </div>
+)}
 
       <Dialog
         open={showAudioConverter}
