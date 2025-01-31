@@ -47,16 +47,16 @@ function App() {
   };
 
   const handleConvertToAudio = () => {
-    setShowAudioConverter(true); 
+    setShowAudioConverter(true);
   };
 
   const handleCloseAudioConverter = () => {
-    setShowAudioConverter(false); 
+    setShowAudioConverter(false);
   };
 
   useEffect(() => {
     if (response) {
-      console.log('We Got Something!!');
+      console.log('We Got Something!!', response);
     }
   }, [response]);
 
@@ -89,7 +89,17 @@ function App() {
         <div style={{ marginTop: '20px' }}>
           <Typography variant="h5">Response:</Typography>
           <Paper elevation={10} sx={{ padding: 10 }}>
-            {response}
+            {/* Render the structured response */}
+            <Typography variant="h6">{response.title}</Typography>
+            <Typography variant="body1" style={{ marginTop: '10px' }}>
+              <strong>Introduction:</strong> {response.introduction}
+            </Typography>
+            <Typography variant="body1" style={{ marginTop: '10px' }}>
+              <strong>Main Content:</strong> {response.mainContent}
+            </Typography>
+            <Typography variant="body1" style={{ marginTop: '10px' }}>
+              <strong>Conclusion:</strong> {response.conclusion}
+            </Typography>
           </Paper>
 
           <Button
@@ -111,7 +121,7 @@ function App() {
       >
         <DialogTitle>Convert Response to Audio</DialogTitle>
         <DialogContent>
-          <AudioConverter initialText={response} apiUrl={API} />
+          <AudioConverter initialText={JSON.stringify(response)} apiUrl={API} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseAudioConverter} color="secondary">
