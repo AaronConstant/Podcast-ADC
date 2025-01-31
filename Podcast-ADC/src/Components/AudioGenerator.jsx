@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import {
   TextField,
   Button,
@@ -10,16 +9,14 @@ import {
   Box,
 } from "@mui/material";
 
-const AudioConverter = ({ initialText }) => {
-  const [text, setText] = useState(initialText || ""); 
+const AudioConverter = ({ initialText, apiUrl }) => {
+  const [text, setText] = useState(initialText || "");
   const [audioUrl, setAudioUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (initialText) {
-      setText(initialText); 
-    }
+    setText(initialText || "");
   }, [initialText]);
 
   const handleInputChange = (e) => {
@@ -32,11 +29,25 @@ const AudioConverter = ({ initialText }) => {
     setError("");
 
     try {
-      const response = await axios.post("/audio", {
-        elevenprompt: text,
+      console.log("Sending request to:", `${apiUrl}/geminiprompt/audio`);
+      console.log("Request body:", { elevenprompt: text });
+
+      const response = await fetch(`${apiUrl}/geminiprompt/audio`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          elevenprompt: text,
+        }),
       });
 
-      setAudioUrl(response.data.audio_url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setAudioUrl(data.audio_url);
     } catch (err) {
       console.error("Error converting text to audio:", err);
       setError("Failed to convert text to audio. Please try again.");
@@ -45,6 +56,8 @@ const AudioConverter = ({ initialText }) => {
     }
   };
 
+  console.log("Sending request to:", `${apiUrl}/geminiprompt/audio`);
+  console.log("Request body:", { elevenprompt: text });
   return (
     <Container maxWidth="md">
       <Paper elevation={3} sx={{ padding: 4, marginTop: 4 }}>

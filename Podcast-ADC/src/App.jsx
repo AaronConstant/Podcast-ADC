@@ -11,16 +11,14 @@ import {
   DialogContent,
   DialogActions,
 } from '@mui/material';
-import AudioConverter from './Components/AudioGenerator'; 
+import AudioConverter from './Components/AudioGenerator';
 
 function App() {
   const API = import.meta.env.VITE_BASE_URL || 'http://localhost:4000';
-  console.log(API);
-
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [showAudioConverter, setShowAudioConverter] = useState(false); 
+  const [showAudioConverter, setShowAudioConverter] = useState(false);
 
   const handleSubmit = async () => {
     setIsLoading(true);
@@ -33,13 +31,14 @@ function App() {
         },
         body: JSON.stringify({ geminiprompt: prompt }),
       });
-
+      console.log("Response status from Gemini:", res.status);
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
 
       const data = await res.json();
-      setResponse(data);
+      console.log("Gemini response:", data);
+      setResponse(data); 
     } catch (error) {
       console.error('An error occurred:', error);
     } finally {
@@ -57,7 +56,7 @@ function App() {
 
   useEffect(() => {
     if (response) {
-      console.log('We Got Something:', response);
+      console.log('We Got Something!!');
     }
   }, [response]);
 
@@ -112,7 +111,7 @@ function App() {
       >
         <DialogTitle>Convert Response to Audio</DialogTitle>
         <DialogContent>
-          <AudioConverter initialText={response} /> 
+          <AudioConverter initialText={response} apiUrl={API} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseAudioConverter} color="secondary">
