@@ -19,6 +19,7 @@ function App() {
   const [response, setResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showAudioConverter, setShowAudioConverter] = useState(false);
+  const [text, setText] = useState('');
 
   const handleSubmit = async () => {
     setIsLoading(true);
@@ -47,7 +48,20 @@ function App() {
   };
 
   const handleConvertToAudio = () => {
-    setShowAudioConverter(true);
+    if (response) {
+      const responseString = `
+        ${response.title}
+        ${response.introduction}
+         ${response.mainContent}
+         ${response.conclusion}
+      `;
+
+      console.log("Converted response string:", responseString);
+
+      setShowAudioConverter(true);
+
+      setText(responseString);
+    }
   };
 
   const handleCloseAudioConverter = () => {
@@ -85,27 +99,27 @@ function App() {
         </div>
       )}
 
-{response && !isLoading && (
-  <div style={{ marginTop: '20px' }}>
-    <Typography variant="h5">Response:</Typography>
-    <Paper elevation={10} sx={{ padding: 10 }}>
-      {Object.entries(response).map(([key, value]) => (
-        <Typography key={key} variant="body1" style={{ marginTop: '10px' }}>
-          <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {value}
-        </Typography>
-      ))}
-    </Paper>
+      {response && !isLoading && (
+        <div style={{ marginTop: '20px' }}>
+          <Typography variant="h5">Response:</Typography>
+          <Paper elevation={10} sx={{ padding: 10, margin: 2 }}>
+            {Object.entries(response).map(([key, value]) => (
+              <Typography key={key} variant="body1" style={{ marginTop: '10px' }}>
+                <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {value}
+              </Typography>
+            ))}
+          </Paper>
 
-    <Button
-      variant="contained"
-      color="primary"
-      onClick={handleConvertToAudio}
-      style={{ marginTop: '20px' }}
-    >
-      Convert to Audio?
-    </Button>
-  </div>
-)}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleConvertToAudio}
+            style={{ marginTop: '20px' }}
+          >
+            Convert to Audio ?
+          </Button>
+        </div>
+      )}
 
       <Dialog
         open={showAudioConverter}
@@ -115,7 +129,7 @@ function App() {
       >
         <DialogTitle>Convert Response to Audio</DialogTitle>
         <DialogContent>
-          <AudioConverter initialText={JSON.stringify(response)} apiUrl={API} />
+          <AudioConverter initialText={text} apiUrl={API} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseAudioConverter} color="secondary">
