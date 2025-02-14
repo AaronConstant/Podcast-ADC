@@ -15,7 +15,7 @@ Welcome to **Podcast-ADC**, a project dedicated to analyzing, processing, and en
 
 ## Project Overview
 
-**Podcast-ADC** is designed to provide a simplistic tool for podcast enthusiasts, researchers, and developers. Here you're able to transcribe podcast episodes, analyze audio quality, or extract metadata, this project has you covered. The goal is to make podcast data easily obtainable and cater to your entertainment interests.
+**Podcast-ADC** is designed to provide a simplistic tool for podcast enthusiasts, researchers, and developers. With this application, you're able to transcribe podcast episodes from text to speech for all your entertainment purposes, this project has you covered. The goal is to make podcast data easily obtainable and cater to your entertainment interests.
 
 [Backend](https://github.com/AaronConstant/Podcast-ADC-BE)
 
