@@ -12,6 +12,7 @@ import {
   DialogActions,
 } from '@mui/material';
 import AudioConverter from './Components/AudioGenerator';
+import Loading from './Components/Loading';
 
 function App() {
   const API = import.meta.env.VITE_BASE_URL || 'http://localhost:4000';
@@ -20,6 +21,25 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [showAudioConverter, setShowAudioConverter] = useState(false);
   const [text, setText] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000); // Adjust the duration as needed
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (response) {
+      console.log('We Got Something!!', response);
+    }
+  }, [response]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   const handleSubmit = async () => {
     setIsLoading(true);
@@ -68,15 +88,10 @@ function App() {
     setShowAudioConverter(false);
   };
 
-  useEffect(() => {
-    if (response) {
-      console.log('We Got Something!!', response);
-    }
-  }, [response]);
-
   return (
     <div style={{ padding: '20px' }}>
-      <Typography variant="h4">Gemini AI Prompt</Typography>
+      <Typography><h1>Welcome to</h1></Typography>
+      <Typography variant="h4">Pushing Out Podcasts</Typography>
       <TextField
         fullWidth
         label="Enter your prompt..."
