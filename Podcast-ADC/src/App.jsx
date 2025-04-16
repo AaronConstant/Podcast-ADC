@@ -76,7 +76,7 @@ function App() {
          ${response.conclusion}
       `;
 
-      console.log("Converted response string:", responseString);
+      console.log("Converted response string: ", responseString);
 
       setShowAudioConverter(true);
 

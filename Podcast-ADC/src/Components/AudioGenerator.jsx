@@ -46,15 +46,12 @@ const AudioConverter = ({ initialText, apiUrl }) => {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      // Get the audio data as a Blob
       const blob = await response.blob();
 
-      // Create a URL for the Blob
       const audioUrl = URL.createObjectURL(blob);
       setAudioUrl(audioUrl);
 
-      // Log the audio URL for debugging
-      console.log("Audio URL:", audioUrl);
+      console.log("Audio URL: ", audioUrl);
     } catch (err) {
       console.error("Error converting text to audio:", err);
       setError("Failed to convert text to audio. Please try again.");

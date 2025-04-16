@@ -23,7 +23,7 @@ const Loading = () => {
         transition: 'opacity 1s ease-in-out',
       }}
     >
-      <h1>We are Loading in...🥹</h1>
+      <h1>We are Loading in...</h1>
       <CircularProgress />
     </Box>
   );
