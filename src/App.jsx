@@ -15,7 +15,7 @@ import AudioConverter from './Components/AudioGenerator';
 import Loading from './Components/Loading';
 
 function App() {
-  const API = import.meta.env.VITE_BASE_URL || 'http://localhost:4000';
+  const API = import.meta.env.VITE_BASE_URL;
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
