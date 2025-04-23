@@ -30,7 +30,8 @@ const AudioConverter = ({ initialText, apiUrl }) => {
 
     try {
       console.log("Sending request to:", `${apiUrl}/geminiprompt/audio`);
-      console.log("Request body:", { elevenprompt: text });
+      console.log("Request body:", { googleCloudTTS: text });
+      console.log('API Url:', apiUrl)
 
       const response = await fetch(`${apiUrl}/geminiprompt/audio`, {
         method: "POST",
@@ -38,18 +39,20 @@ const AudioConverter = ({ initialText, apiUrl }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          elevenprompt: text,
+          googleCloudTTS: text,
         }),
       });
-
+      console.log("Line: 45 - Text being sent back!:",text)
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      const blob = await response.blob();
+      if (response.ok) {
+        const blob = await response.blob();
+        const audioUrl = URL.createObjectURL(blob);
 
-      const audioUrl = URL.createObjectURL(blob);
-      setAudioUrl(audioUrl);
+        setAudioUrl(audioUrl);
+      }
 
       console.log("Audio URL: ", audioUrl);
     } catch (err) {
@@ -106,7 +109,7 @@ const AudioConverter = ({ initialText, apiUrl }) => {
             </Typography>
             <audio controls style={{ width: "100%" }}>
               <source src={audioUrl} type="audio/mpeg" />
-              Your browser does not support the audio element.
+              Your bro wser does not support the audio element.
             </audio>
           </Box>
         )}

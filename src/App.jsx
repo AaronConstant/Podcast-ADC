@@ -91,7 +91,7 @@ function App() {
   return (
     <div style={{ padding: '20px' }}>
       <Typography><h1>Welcome to</h1></Typography>
-      <Typography variant="h4">Pushing Out Podcasts</Typography>
+      <Typography variant="h4">Chit Chat Podcasts</Typography>
       <TextField
         fullWidth
         label="Enter your prompt..."
