@@ -44,5 +44,8 @@ To get started with the front-end portion of the project, follow these steps:
    git clone https://github.com/your-username/Podcast-ADC.git
    cd Podcast-ADC
 
-2. **Click Link Below**: 
+2. **Back-End**:
+   https://github.com/AaronConstant/Podcast-ADC-BE
+
+3. **Click Link Below**: 
    https://chitchatpodcast.netlify.app/
