@@ -24,6 +24,7 @@ export default function SignUp() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  console.log(useForm());
   const onSubmit = (data) => {
     console.log(data);
     // Axios call to submit the form data
@@ -68,9 +69,12 @@ export default function SignUp() {
                 type="email"
                 label="Email"
                 placeholder="Email"
-                {...register("email", { required: true })}
+                {...register("email", { required: true,pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
+                  message: 'Invalid email address'
+                 }})}
                 error={!!errors.email}
-                helperText={errors.email ? "This field is required" : ""}
+                helperText={errors.email ? "This field is required" : errors.email.message}
               />
             </StyledBox>
             <StyledBox>
