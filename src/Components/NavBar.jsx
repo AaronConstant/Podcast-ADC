@@ -1,20 +1,21 @@
-import { AppBar } from '@mui/material'
-import React from 'react'
-import '../Styling/NavbarStyling.scss'
-
+import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import React from "react";
+import { Link } from "react-router-dom";
+import  "../Styling/NavbarStyling.scss";
+import { useTheme } from "@mui/material/styles";
+import {StyledButton,} from "../Styling/theme.jsx";
 export default function NavBar() {
+    const theme = useTheme();
   return (
-    <AppBar position="static">
-      <div className="nav-bar">
-        <h1>My App</h1>
-        <nav>
-          <ul>
-            <li>Home</li>
-            <li>About Us</li>
-            <li>Contact</li>
-          </ul>
-        </nav>
-      </div>
+    <AppBar position="static" className='nav_bar' color="secondary">
+      <Toolbar>
+        <Typography variant="h6">My App</Typography>
+        <Box className="nav_buttons_container">
+        <StyledButton className='nav_buttons' LinkComponent={Link} to='/home'>Home</StyledButton>
+        <StyledButton className='nav_buttons' LinkComponent={Link} to='/about'>About Us</StyledButton>
+        <StyledButton className='nav_buttons' LinkComponent={Link} to='/contact'>Contact</StyledButton>
+        </Box>
+      </Toolbar>
     </AppBar>
-  )
+  );
 }
