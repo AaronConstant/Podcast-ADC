@@ -9,31 +9,83 @@ import {
   StyledBox,
 } from "../../Styling/theme";
 import "../../Styling/SignUpStyling.scss";
-import { InputAdornment, IconButton } from "@mui/material";
+import { InputAdornment, IconButton, MenuItem } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
+import axios from "axios";
 
+const API = import.meta.env.VITE_BASE_URL;
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
+  const [newUser, setNewUser] = useState({
+    first_name: "",
+    last_name: "",
+    username: "",
+    password: "",
+    email: "",
+    phone_number: "",
+    sex_at_birth: "",
+    gender_identity: "",
+    date_of_birth: "",
+  });
+
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword((prev) => !prev);
+  }
+
   const {
     register,
     handleSubmit,
+    reset,
+    watch,
     formState: { errors },
   } = useForm();
-  console.log(useForm());
-  const onSubmit = (data) => {
-    console.log(data);
-    // Axios call to submit the form data
-    // navigate("/home");
+
+  const onSubmit = async (data) => {
+    const formattedData = {
+      first_name: data.first_name,
+      last_name: data.last_name,
+      username: data.username,
+      password: data.password,
+      email: data.email,
+      phone_number: formatPhoneNumber(data.phone_number),
+      sex_at_birth: data.sex_at_birth,
+      gender_identity: data.gender_identity,
+      date_of_birth: data.date_of_birth,
+    };
+
+    try {
+      const response = await axios.post(`${API}/users`, formattedData);
+      console.log("User created successfully:", response.data);
+
+      setNewUser(formattedData);
+      reset({
+        first_name: "",
+        last_name: "",
+        username: "",
+        password: "",
+        email: "",
+        phone_number: "",
+        sex_at_birth: "",
+        gender_identity: "",
+        date_of_birth: "",
+      });
+    } catch (error) {
+      console.error("Error creating user:", error);
+      alert("Error creating user. Please try again.");
+    }
   };
+
   const formatPhoneNumber = (value) => {
-    // Format the phone number as 123-456-7890
-    
-  }
+    if (value.length === 10) {
+      return value.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+    }
+  };
 
   // Attempt using map to create form fields dynamically at a later stage
   return (
@@ -46,21 +98,71 @@ export default function SignUp() {
             <StyledBox>
               <TextField
                 fullWidth
-                type="first_name"
                 label="First Name"
-                {...register("firstName", { required: true })}
-                error={!!errors.firstName}
-                helperText={errors.firstName ? "This field is required" : ""}
+                {...register("first_name", { required: true })}
+                error={!!errors.first_name}
+                helperText={errors.first_name ? "This field is required" : ""}
               />
             </StyledBox>
             <StyledBox>
               <TextField
-              fullWidth
-                type="last_name"
+                fullWidth
                 label="Last Name"
-                {...register("lastName", { required: true })}
-                error={!!errors.lastName}
-                helperText={errors.lastName ? "This field is required" : ""}
+                {...register("last_name", { required: true })}
+                error={!!errors.last_name}
+                helperText={errors.last_name ? "This field is required" : ""}
+              />
+            </StyledBox>
+            <StyledBox>
+              <TextField
+                fullWidth
+                select
+                label="Sex at Birth"
+                defaultValue=""
+                {...register("sex_at_birth")}
+                error={!!errors.sex_at_birth}
+                helperText={errors.sex_at_birth ? "Optional Input" : ""}
+              >
+                <MenuItem value="male">Male</MenuItem>
+                <MenuItem value="female">Female</MenuItem>
+                <MenuItem value="intersex">Intersex</MenuItem>
+                <MenuItem value="other">other</MenuItem>
+                <MenuItem value="prefer_not_to_say">Prefer not to say</MenuItem>
+              </TextField>
+            </StyledBox>
+            <StyledBox>
+              <TextField
+                fullWidth
+                select
+                label="Gender Identity"
+                defaultValue=""
+                {...register("gender_identity")}
+                error={!!errors.gender_identity}
+                helperText={
+                  errors.gender_identity ? "This field is required" : ""
+                }
+              >
+                <MenuItem value="male">Male</MenuItem>
+                <MenuItem value="female">Female</MenuItem>
+                <MenuItem value="non_binary">Non-binary</MenuItem>
+                <MenuItem value="transgender">Transgender</MenuItem>
+                <MenuItem value="genderqueer">Genderqueer</MenuItem>
+                <MenuItem value="two_spirited">Two Spirited</MenuItem>
+                <MenuItem value="prefer_not_to_say">Prefer not to say</MenuItem>
+                <MenuItem value="other">Other</MenuItem>
+              </TextField>
+            </StyledBox>
+            <StyledBox>
+              <TextField
+                fullWidth
+                type="date"
+                label="Date of Birth"
+                InputLabelProps={{ shrink: true }}
+                {...register("date_of_birth", { required: true })}
+                error={!!errors.date_of_birth}
+                helperText={
+                  errors.date_of_birth ? "This field is required" : ""
+                }
               />
             </StyledBox>
             <StyledBox>
@@ -69,22 +171,25 @@ export default function SignUp() {
                 type="email"
                 label="Email"
                 placeholder="Email"
-                {...register("email", { required: true,pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
-                  message: 'Invalid email address'
-                 }})}
+                {...register("email", {
+                  required: true,
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
+                    message: "Invalid email address",
+                  },
+                })}
                 error={!!errors.email}
-                helperText={errors.email ? "This field is required" : errors.email.message}
+                helperText={errors.email ? "This field is required" : ""}
               />
             </StyledBox>
             <StyledBox>
               <TextField
                 fullWidth
-                type="phone_number"
+                type="tel"
                 label="Phone Number"
-                {...register("phoneNumber", { required: true })}
-                error={!!errors.phoneNumber}
-                helperText={errors.phoneNumber ? "This field is required" : ""}
+                {...register("phone_number", { required: true })}
+                error={!!errors.phone_number}
+                helperText={errors.phone_number ? "This field is required" : ""}
               />
             </StyledBox>
             <StyledBox>
@@ -102,9 +207,15 @@ export default function SignUp() {
                 fullWidth
                 type={showPassword ? "text" : "password"}
                 label="Password"
-                {...register("password", { required: true })}
+                {...register("password", {
+                  required: true,
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters",
+                  },
+                })}
                 error={!!errors.password}
-                helperText={errors.password ? "This field is required" : ""}
+                helperText={errors.password ? errors.password.message : ""}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -116,8 +227,41 @@ export default function SignUp() {
                 }}
               />
             </StyledBox>
-
-            <StyledButton type="submit" className="submitBtn">Submit</StyledButton>
+            <StyledBox>
+              <TextField
+                fullWidth
+                type={showConfirmPassword ? "text" : "password"}
+                label="Confirm Password"
+                {...register("confirmPassword", {
+                  required: "Please confirm your password",
+                  validate: (value) =>
+                    value === watch("password") || "Passwords do not match",
+                })}
+                error={!!errors.confirmPassword}
+                helperText={
+                  errors.confirmPassword ? errors.confirmPassword.message : ""
+                }
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={toggleConfirmPasswordVisibility}
+                        edge="end"
+                      >
+                        {showConfirmPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </StyledBox>
+            <StyledButton type="submit" className="submitBtn">
+              Submit
+            </StyledButton>
           </form>
         </StyledPaper>
       </StyledContainer>
