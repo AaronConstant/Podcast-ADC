@@ -28,7 +28,8 @@ const theme = createTheme({
     backgroundColor: theme.palette.secondary.main,
     color: theme.palette.secondary,
     '&:hover': {
-        backgroundColor: theme.palette.primary.dark,
+        backgroundColor: theme.palette.primary.light,
+        color: theme.palette.primary.contrastText,
     },
     
 }));
@@ -37,6 +38,12 @@ const theme = createTheme({
     fontStyle: 'italic',
     fontSize: '1.8rem',
     fontWeight: 'bold',
+}));
+const StyledSubTypography = styled(Typography)(({ theme }) => ({
+    color: theme.palette.secondary.main,
+    fontStyle: 'italic',
+    fontSize: '1.3rem',
+    fontWeight: 'inherit',
 }));
  const StyledContainer = styled(Container)(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
@@ -59,5 +66,5 @@ const StyledBox = styled(Box)(({ theme }) => ({
     margin: theme.spacing(3)    
 }));
 
-export { StyledBox,theme,StyledButton, StyledTypography, StyledContainer, StyledPaper};
+export { StyledBox,theme,StyledButton, StyledTypography, StyledContainer, StyledPaper,StyledSubTypography};
 

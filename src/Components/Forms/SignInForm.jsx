@@ -5,7 +5,7 @@ import { StyledButton,StyledContainer,StyledTypography,StyledPaper } from '../..
 
 export default function SignIn() {
   const navigate = useNavigate()
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const { register, handleSubmit, reset, formState: { errors } } = useForm()
   return (
     <StyledContainer>
       SignIn

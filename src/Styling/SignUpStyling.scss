@@ -19,5 +19,8 @@
             align-self: center;
             width: 25%;
         }
+        .option_title {
+            grid-column: span 2
+        }
     }
 }

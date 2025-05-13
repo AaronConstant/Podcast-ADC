@@ -7,6 +7,7 @@ import {
   StyledTypography,
   StyledPaper,
   StyledBox,
+  StyledSubTypography
 } from "../../Styling/theme";
 import "../../Styling/SignUpStyling.scss";
 import { InputAdornment, IconButton, MenuItem } from "@mui/material";
@@ -116,45 +117,6 @@ export default function SignUp() {
             <StyledBox>
               <TextField
                 fullWidth
-                select
-                label="Sex at Birth"
-                defaultValue=""
-                {...register("sex_at_birth")}
-                error={!!errors.sex_at_birth}
-                helperText={errors.sex_at_birth ? "Optional Input" : ""}
-              >
-                <MenuItem value="male">Male</MenuItem>
-                <MenuItem value="female">Female</MenuItem>
-                <MenuItem value="intersex">Intersex</MenuItem>
-                <MenuItem value="other">other</MenuItem>
-                <MenuItem value="prefer_not_to_say">Prefer not to say</MenuItem>
-              </TextField>
-            </StyledBox>
-            <StyledBox>
-              <TextField
-                fullWidth
-                select
-                label="Gender Identity"
-                defaultValue=""
-                {...register("gender_identity")}
-                error={!!errors.gender_identity}
-                helperText={
-                  errors.gender_identity ? "This field is required" : ""
-                }
-              >
-                <MenuItem value="male">Male</MenuItem>
-                <MenuItem value="female">Female</MenuItem>
-                <MenuItem value="non_binary">Non-binary</MenuItem>
-                <MenuItem value="transgender">Transgender</MenuItem>
-                <MenuItem value="genderqueer">Genderqueer</MenuItem>
-                <MenuItem value="two_spirited">Two Spirited</MenuItem>
-                <MenuItem value="prefer_not_to_say">Prefer not to say</MenuItem>
-                <MenuItem value="other">Other</MenuItem>
-              </TextField>
-            </StyledBox>
-            <StyledBox>
-              <TextField
-                fullWidth
                 type="date"
                 label="Date of Birth"
                 InputLabelProps={{ shrink: true }}
@@ -258,6 +220,46 @@ export default function SignUp() {
                   ),
                 }}
               />
+            </StyledBox>
+            <StyledSubTypography className="option_title">Optional Inputs</StyledSubTypography>
+            <StyledBox>
+              <TextField
+                fullWidth
+                select
+                label="Assigned at Birth"
+                defaultValue=""
+                {...register("sex_at_birth")}
+                error={!!errors.sex_at_birth}
+                helperText={errors.sex_at_birth ? "Optional Input" : ""}
+              >
+                <MenuItem value="male">Male</MenuItem>
+                <MenuItem value="female">Female</MenuItem>
+                <MenuItem value="intersex">Intersex</MenuItem>
+                <MenuItem value="other">other</MenuItem>
+                <MenuItem value="prefer_not_to_say">Prefer not to say</MenuItem>
+              </TextField>
+            </StyledBox>
+            <StyledBox>
+              <TextField
+                fullWidth
+                select
+                label="Gender Identity"
+                defaultValue=""
+                {...register("gender_identity")}
+                error={!!errors.gender_identity}
+                helperText={
+                  errors.gender_identity ? "This field is required" : ""
+                }
+              >
+                <MenuItem value="male">Male</MenuItem>
+                <MenuItem value="female">Female</MenuItem>
+                <MenuItem value="non_binary">Non-binary</MenuItem>
+                <MenuItem value="transgender">Transgender</MenuItem>
+                <MenuItem value="genderqueer">Genderqueer</MenuItem>
+                <MenuItem value="two_spirited">Two Spirited</MenuItem>
+                <MenuItem value="prefer_not_to_say">Prefer not to say</MenuItem>
+                <MenuItem value="other">Other</MenuItem>
+              </TextField>
             </StyledBox>
             <StyledButton type="submit" className="submitBtn">
               Submit

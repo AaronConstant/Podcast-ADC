@@ -9,7 +9,7 @@ export default function NavBar() {
   return (
     <AppBar position="static" className='nav_bar' color="secondary">
       <Toolbar>
-        <Typography variant="h6">My App</Typography>
+        <Typography variant="h6">Chit Chat Logo</Typography>
         <Box className="nav_buttons_container">
         <StyledButton className='nav_buttons' LinkComponent={Link} to='/home'>Home</StyledButton>
         <StyledButton className='nav_buttons' LinkComponent={Link} to='/about'>About Us</StyledButton>
