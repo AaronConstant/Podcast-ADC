@@ -29,11 +29,11 @@ const AudioConverter = ({ initialText, apiUrl }) => {
     setError("");
 
     try {
-      console.log("Sending request to:", `${apiUrl}/geminiprompt/audio`);
+      console.log("Sending request to:", `${apiUrl}/:user_id/podcastentries/audio`);
       console.log("Request body:", { googleCloudTTS: text });
       console.log('API Url:', apiUrl)
 
-      const response = await fetch(`${apiUrl}/geminiprompt/audio`, {
+      const response = await fetch(`${apiUrl}/:user_id/podcastentries/audio`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -109,7 +109,7 @@ const AudioConverter = ({ initialText, apiUrl }) => {
             </Typography>
             <audio controls style={{ width: "100%" }}>
               <source src={audioUrl} type="audio/mpeg" />
-              Your bro wser does not support the audio element.
+              Your browser does not support the audio element.
             </audio>
           </Box>
         )}

@@ -13,9 +13,11 @@ import {
 } from '@mui/material';
 import AudioConverter from './AudioGenerator';
 import Loading from './Loading';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function App() {
   const API = import.meta.env.VITE_BASE_URL;
+  const {user_id} = useParams()
   const [prompt, setPrompt] = useState('');
   const [response, setResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,12 +47,12 @@ function App() {
     setIsLoading(true);
     try {
       console.log('Line 47-Prompt:', prompt);
-      const res = await fetch(`${API}/geminiprompt`, {
+      const res = await fetch(`${API}/users/:${user_id}/podcastentries`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ geminiprompt: prompt }),
+        body: JSON.stringify({ podcastentry: prompt }),
       });
       console.log("Response status from Gemini:", res.status);
       if (!res.ok) {

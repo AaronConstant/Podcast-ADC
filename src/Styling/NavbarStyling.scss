@@ -11,6 +11,16 @@
             align-items: center;
             justify-content: space-between;
         }
+
+        .sign_forms {
+            background-color: rgba(223, 234, 233, 0.917);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px;
+            margin: 10px;
+        }
     }
 
 

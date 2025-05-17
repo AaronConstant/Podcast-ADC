@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import  "../Styling/NavbarStyling.scss";
 import { useTheme } from "@mui/material/styles";
-import {StyledButton,} from "../Styling/theme.jsx";
+import {StyledButton,StyledBox} from "../Styling/theme.jsx";
 export default function NavBar() {
     const theme = useTheme();
   return (
@@ -14,6 +14,10 @@ export default function NavBar() {
         <StyledButton className='nav_buttons' LinkComponent={Link} to='/home'>Home</StyledButton>
         <StyledButton className='nav_buttons' LinkComponent={Link} to='/about'>About Us</StyledButton>
         <StyledButton className='nav_buttons' LinkComponent={Link} to='/contact'>Contact</StyledButton>
+        <StyledBox className="sign_forms">
+        <StyledButton>Log In</StyledButton>
+        <StyledButton>Sign Up</StyledButton>
+        </StyledBox>
         </Box>
       </Toolbar>
     </AppBar>
