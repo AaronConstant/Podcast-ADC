@@ -76,6 +76,13 @@ export default function SignUp() {
         gender_identity: "",
         date_of_birth: "",
       });
+      const {token, user,message} = response.data
+      console.log("",user)
+      console.log("User created successfully:", message)
+      localStorage.setItem("token",token)
+
+      const id = user.id
+      navigate(`/users/${id}/dashboard`)
     } catch (error) {
       console.error("Error creating user:", error);
       alert("Error creating user. Please try again.");

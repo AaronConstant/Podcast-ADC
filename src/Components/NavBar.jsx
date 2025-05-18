@@ -11,12 +11,12 @@ export default function NavBar() {
       <Toolbar>
         <Typography variant="h6">Chit Chat Logo</Typography>
         <Box className="nav_buttons_container">
-        <StyledButton className='nav_buttons' LinkComponent={Link} to='/home'>Home</StyledButton>
-        <StyledButton className='nav_buttons' LinkComponent={Link} to='/about'>About Us</StyledButton>
-        <StyledButton className='nav_buttons' LinkComponent={Link} to='/contact'>Contact</StyledButton>
+        <Button className='nav_buttons' LinkComponent={Link} to='/home'>Home</Button>
+        <Button className='nav_buttons' LinkComponent={Link} to='/about'>About Us</Button>
+        <Button className='nav_buttons' LinkComponent={Link} to='/contact'>Contact</Button>
         <StyledBox className="sign_forms">
-        <StyledButton>Log In</StyledButton>
-        <StyledButton>Sign Up</StyledButton>
+        <StyledButton LinkComponent={Link} to='/login'>Log In</StyledButton>
+        <StyledButton LinkComponent={Link} to='/signup'>Sign Up</StyledButton>
         </StyledBox>
         </Box>
       </Toolbar>

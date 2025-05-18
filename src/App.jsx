@@ -17,7 +17,7 @@ export default function Apps() {
     <Routes>
       <Route path='/' element ={<LandingPage/>}/>
     <Route path='/home' element={<UserPodcastEntries />}/>
-    <Route path='/signin' element={<SignIn />}/>
+    <Route path='/login' element={<SignIn />}/>
     <Route path='/signup' element={<SignUp />}/>
     <Route path ='/users/:id/dashboard' element = {<UserDashboard/>}/>
     {/* <Route path = '/users/:user_id/podcastentries' element={<Home/>}/> */}
