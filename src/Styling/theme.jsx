@@ -25,7 +25,7 @@ const theme = createTheme({
 });
 
  const StyledButton = styled(Button)(({ theme }) => ({
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.dark,
     color: theme.palette.secondary,
     '&:hover': {
         backgroundColor: theme.palette.primary.light,
