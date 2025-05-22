@@ -9,6 +9,7 @@ import SignUp from './Components/Forms/SignUpForm'
 import UserDashboard from './Components/Users/UserDashboard'
 import UserPodcastEntries from './Components/Users/UserPodcastEntries'
 import AboutUs from  './Components/AboutUs'
+import Contact from './Components/Contact'
 
 export default function Apps() {
   return (
@@ -22,9 +23,10 @@ export default function Apps() {
     <Route path ='/users/:id/dashboard' element = {<UserDashboard/>}/>
     {/* <Route path = '/users/:user_id/podcastentries' element={<Home/>}/> */}
     <Route path='/about' element={<AboutUs />}/>
-    {/* <Route path='/contact' element={<Contact />}/> */}
+    <Route path='/contact' element={<Contact />}/>
       {/* <Home /> */}
     </Routes>
+    {/* Add a Footer */}
     </>
   )
 }

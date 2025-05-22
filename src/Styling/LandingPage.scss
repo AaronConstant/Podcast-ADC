@@ -30,7 +30,7 @@
   border-radius: 20px;
   padding: 1rem;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   
   &:hover {
@@ -275,7 +275,6 @@
   }
 }
 
-// Accessibility improvements
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
@@ -283,7 +282,6 @@
   }
 }
 
-// Focus styles for better accessibility
 .grid-item:focus-visible,
 .cta-button:focus-visible,
 .primary-cta:focus-visible {

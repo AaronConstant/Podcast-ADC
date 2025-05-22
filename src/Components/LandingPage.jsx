@@ -46,7 +46,7 @@ export default function LandingPage() {
             let the AI take it from there.
           </Typography>
           <Box className="intro-cta">
-            <StyledButton size="large" className="cta-button" >
+            <StyledButton size="large" className="cta-button" LinkComponent={Link} to='/signup'>
               Start Creating Now 🎧
             </StyledButton>
           </Box>
@@ -137,7 +137,7 @@ export default function LandingPage() {
           <Typography variant="body1" className="cta-text">
             Join thousands of creators bringing their ideas to life
           </Typography>
-          <StyledButton size="large" className="primary-cta" component={Link} to='/login'>
+          <StyledButton size="large" className="primary-cta" LinkComponent={Link} to='/signup'>
             Create Your First Podcast
           </StyledButton>
         </StyledBox>
