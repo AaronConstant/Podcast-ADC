@@ -1,6 +1,5 @@
 import React from "react";
-import { Typography, Box } from "@mui/material";
-import landingPageVid from "../assets/LandingPage.mp4";
+import { Typography, Box, Paper } from "@mui/material";
 import {
   StyledBox,
   theme,
@@ -11,6 +10,7 @@ import {
   StyledSubTypography,
 } from "../Styling/theme";
 import "../Styling/LandingPage.scss";
+ 
 export default function LandingPage() {
   return (
     <Box className="landing-page-container">
@@ -21,7 +21,8 @@ export default function LandingPage() {
         alt="Hero"
       />
 
-      
+      <StyledPaper className="intro-container">
+        
         <Typography className="intro">
           Ready to bring your voice—and your ideas—to life? Whether you're a
           seasoned podcaster or just curious about creating your first show,
@@ -35,14 +36,50 @@ export default function LandingPage() {
           here to see how it works, you're welcome too—because inspiration
           starts with curiosity. Let’s get podcasting!
         </Typography>
-     
-
-      <StyledContainer className="grid-layout-marketing">
-        <Box className="grid_item">Think</Box>
-        <Box className="grid_item">Rinse</Box>
-        <Box className="grid_item">Dry</Box>
-        <Box className="grid_item">Repeat</Box>
-      </StyledContainer>
+      </StyledPaper>
+      <hr className="section-divider" />
+        {/* Images with simple disclaimer of Processing   */}
+      <StyledPaper className="grid-layout-marketing" elevation={10}>
+        <Box className="grid_item">
+          <Box
+            component="img"
+            className="img"
+            src="src/assets/CCPIconThink.png"
+            alt="Hero"
+          />
+          Think
+          <StyledPaper>
+            <StyledSubTypography>Hello</StyledSubTypography>
+          </StyledPaper>
+        </Box>
+        <Box className="grid_item">
+          <Box
+            component="img"
+            className="img"
+            src="src/assets/CCPIconWrite.png"
+            alt="Hero"
+          />
+          Create
+        </Box>
+        <Box className="grid_item">
+          <Box
+            component="img"
+            className="img"
+            src="src/assets/CCPIconListen.png"
+            alt="Hero"
+          />
+          Listen
+        </Box>
+        <Box className="grid_item">
+          <Box
+            component="img"
+            className="img"
+            src="src/assets/CCPIconRepeat.png"
+            alt="Hero"
+          />
+          Repeat
+        </Box>
+      </StyledPaper>
 
       <StyledContainer className="gradient_container">
         <StyledBox className="gradient_container_one">Hello</StyledBox>

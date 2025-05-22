@@ -15,10 +15,10 @@ export default function NavBar() {
         <Button className='nav_buttons' LinkComponent={Link} to='/home'>Home</Button>
         <Button className='nav_buttons' LinkComponent={Link} to='/about'>About Us</Button>
         <Button className='nav_buttons' LinkComponent={Link} to='/contact'>Contact</Button>
-        <StyledBox className="sign_forms">
+        <Box className="sign_forms">
         <StyledButton LinkComponent={Link} to='/login'>Log In</StyledButton>
         <StyledButton LinkComponent={Link} to='/signup'>Sign Up</StyledButton>
-        </StyledBox>
+        </Box>
         </Box>
       </Toolbar>
     </AppBar>

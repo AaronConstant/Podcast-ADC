@@ -1,12 +1,10 @@
 .nav_bar {
-  // background-color: rgba(223, 234, 233, 0.917);
 
   .nav_buttons_container {
     display: flex;
     justify-content: right;
     width: 100%;
     gap: 20px;
-    // background: rgb(255, 255, 255);
 
     .nav_buttons {
       display: flex;
@@ -16,7 +14,6 @@
     }
 
     .sign_forms {
-      background-color: rgba(223, 234, 233, 0.917);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -27,9 +24,9 @@
   }
   .img_logo {
     width: 9em;
-    height: "auto";
+    height: auto;
     display: "block";
-    max-width: "100%";
+    max-width: 100%;
     border-radius: 20%;
     margin: 0;
     padding: 0;

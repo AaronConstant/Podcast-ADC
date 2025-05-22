@@ -1,83 +1,149 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import {
   StyledButton,
   StyledContainer,
   StyledTypography,
   StyledPaper,
   StyledBox,
-  StyledSubTypography
+  StyledSubTypography,
 } from "../../Styling/theme";
-// import { useAuth } from '../../Context/AuthContext'
-import '../../Styling/SignInStyling.scss'
-import { TextField, Typography } from '@mui/material';
-import axios from 'axios';
-import { useState,useEffect } from 'react';
+import "../../Styling/SignInStyling.scss";
+import { TextField, Typography, Alert } from "@mui/material";
+import axios from "axios";
+import { useState } from "react";
 
-export default function SignIn() { 
-  const API = import.meta.env.VITE_BASE_URL
-  const navigate = useNavigate()
-  const { 
-    register, 
-    handleSubmit, 
-    reset, formState: { errors } 
-    } = useForm()
+export default function SignIn() {
+  const API = import.meta.env.VITE_BASE_URL;
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-    const onSubmit = async (loginInfo) => {
-      try {
-        const response = await axios.post(`${API}/login`, loginInfo);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (loginInfo) => {
+    setIsLoading(true);
+    setError("");
     
-        const { token, user, message } = response.data;
-    
-        localStorage.setItem("token", token);
-               
-        console.log(token)
-        console.log(message);
-    
-        navigate(`/users/${user.id}/dashboard`);
-    
-        reset();
-    
-      } catch (error) {
-        console.error("Error signing in:", error);
-      }
-    };
-    
+    try {
+      const response = await axios.post(`${API}/login`, loginInfo);
+      const { token, user, message } = response.data;
+
+      localStorage.setItem("token", token);
+      console.log(message);
+      navigate(`/users/${user.id}/dashboard`);
+      reset();
+    } catch (error) {
+      console.error("Error signing in:", error);
+      setError(error.response?.data?.message || "Failed to sign in. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <StyledContainer className='signInContainer'> 
-      <StyledBox>
-        <StyledPaper>
-          <StyledTypography>Welcome back!</StyledTypography>
-          {/* <StyledTypography>Please sign in to your account.</StyledTypography> */}
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <StyledBox>
-              <TextField 
-                label='username'
-                variant = 'outlined' 
-                placeholder="Username" 
-                {...register("username", { required: true })} 
-                error ={!!errors.username}
-              helperText={errors.username ? "Please enter username/email" : ""}
-              />
-            </StyledBox>
-            <StyledBox>
-              <TextField 
-                label='password'
-                type="password" 
-                placeholder="Password" 
-                {...register("password", { required: true })} 
-                error ={!!errors.password}
-                helperText={errors.password ? "Please enter your password" : ""}
+    <div className="signin-page">
+      <StyledContainer className="signin-container">
+        {/* Video Section */}
+        <div className="video-section">
+          <video 
+            className="welcome-video" 
+            autoPlay 
+            muted 
+            playsInline
+          >
+            <source src="src/assets/WelcomeBackVid.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        {/* Form Section */}
+        <div className="form-section">
+          <StyledPaper className="signin-paper">
+            <div className="form-header">
+              <StyledTypography className="signin-title">
+                Ah! Hello Friend
+              </StyledTypography>
+              <Typography className="signin-subtitle">
+                Please sign in to your account
+              </Typography>
+            </div>
+
+            {error && (
+              <Alert severity="error" className="error-alert">
+                {error}
+              </Alert>
+            )}
+
+            <form onSubmit={handleSubmit(onSubmit)} className="signin-form">
+              <div className="form-field">
+                <TextField
+                  label="Username or Email"
+                  variant="outlined"
+                  fullWidth
+                  className="signin-input"
+                  {...register("username", { 
+                    required: "Username or email is required",
+                    minLength: {
+                      value: 3,
+                      message: "Username must be at least 3 characters"
+                    }
+                  })}
+                  error={!!errors.username}
+                  helperText={errors.username?.message}
                 />
-            </StyledBox>
-            <StyledButton type="submit">Sign In</StyledButton>
-          </form>
-        </StyledPaper>
-        <Typography variant='h6' fontSize={'1em'}>Don't have an account?</Typography>
-        <StyledButton onClick={() => navigate('/signup')}>Sign Up</StyledButton>
-      </StyledBox>
-    </StyledContainer>
-  )
+              </div>
+
+              <div className="form-field">
+                <TextField
+                  label="Password"
+                  type="password"
+                  variant="outlined"
+                  fullWidth
+                  className="signin-input"
+                  {...register("password", { 
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters"
+                    }
+                  })}
+                  error={!!errors.password}
+                  helperText={errors.password?.message}
+                />
+              </div>
+
+              <StyledButton 
+                type="submit" 
+                className="signin-button"
+                disabled={isLoading}
+                fullWidth
+              >
+                {isLoading ? "Signing In..." : "Sign In"}
+              </StyledButton>
+            </form>
+
+            <div className="signup-prompt">
+              <Typography className="signup-text">
+                Don't have an account?
+              </Typography>
+              <StyledButton 
+                onClick={() => navigate("/signup")}
+                variant="outlined"
+                className="signup-button"
+              >
+                Sign Up
+              </StyledButton>
+            </div>
+          </StyledPaper>
+        </div>
+      </StyledContainer>
+    </div>
+  );
 }
