@@ -12,7 +12,7 @@ export default function NavBar() {
       <Toolbar>
         <Box component='img' src={CCPLogo} className="img_logo"/>
         <Box className="nav_buttons_container">
-        <Button className='nav_buttons' LinkComponent={Link} to='/home'>Home</Button>
+        <Button className='nav_buttons' LinkComponent={Link} to='/'>Home</Button>
         <Button className='nav_buttons' LinkComponent={Link} to='/about'>About Us</Button>
         <Button className='nav_buttons' LinkComponent={Link} to='/contact'>Contact</Button>
         <Box className="sign_forms">

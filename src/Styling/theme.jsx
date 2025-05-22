@@ -54,7 +54,7 @@ const StyledSubTypography = styled(Typography)(({ theme }) => ({
 }));
  const StyledPaper = styled(Paper)(({ theme }) => ({
     backgroundColor: '#ebe7dd',
-    border:'2px groove white',
+    border:'2px groove gray',
     padding: theme.spacing(1),
     borderRadius: theme.shape.borderRadius,
     margin: theme.spacing(3)
