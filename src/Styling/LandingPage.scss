@@ -6,6 +6,8 @@
   min-height: 100vh;
   padding: 0 1rem;
   margin-top: 2rem;
+background: linear-gradient(177deg,rgba(247, 244, 237, 1) 0%, rgba(93, 237, 245, 1) 100%);
+
   
   @media (max-width: 768px) {
     margin-top: 1rem;
@@ -13,7 +15,7 @@
   }
 }
 
-// Hero Section
+// ! *** Hero Section *** //
 .hero-section {
   display: flex;
   flex-direction: column;
@@ -27,7 +29,7 @@
   width: 100%;
   max-width: 50rem;
   height: auto;
-  border-radius: 20px;
+  border-radius: 50%;
   padding: 1rem;
   margin-bottom: 2rem;
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0);
@@ -50,6 +52,9 @@
   margin: 0 auto;
   padding: 3rem !important;
   text-align: center;
+  border-radius: 100px !important;
+  background:  #f5f4ed !important;
+  
   
   @media (max-width: 768px) {
     padding: 2rem 1rem !important;
@@ -66,12 +71,14 @@
 }
 
 .intro-text {
-  color: #162a6f;
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  margin-bottom: 1.5rem;
-  text-align: left;
+  color: #162a6f !important;
+    font-family: "DM Serif Display", serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;  
+  font-size: 1.1rem !important;
+  line-height: 1.8 !important;
+  margin-bottom: 1.5rem !important;
+  text-align: left !important;
   
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -81,12 +88,14 @@
 }
 
 .intro-cta {
-  margin-top: 2rem;
+  margin-top: 3rem ;
   
   .cta-button {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
+    padding: 1rem 2rem !important;
+    font-size: 1.1rem ;
     font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 15px;
     transition: all 0.3s ease;
     
     &:hover {
@@ -96,7 +105,7 @@
   }
 }
 
-// How It Works Section
+// ! *** How It Works Section *** //
 .how-it-works-section {
   width: 100%;
   max-width: 1200px;
@@ -104,10 +113,12 @@
 }
 
 .section-title {
+  font-family: "DM Serif Display", serif !important;
+  font-size: 4em !important;
   text-align: center;
   margin-bottom: 3rem !important;
   color: rgb(32, 61, 160) !important;
-  margin-left: 5em !important;
+  margin-left: 2em !important;
 }
 
 .grid-layout-marketing {
@@ -116,6 +127,8 @@
   gap: 2rem;
   width: 100%;
   padding: 2rem !important;
+    background:  #f5f4ed !important;
+
   
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
@@ -198,8 +211,9 @@
   }
 }
 
-// CTA Section
+// ! *** CTA Section *** //
 .cta-section {
+  display: flex;
   width: 100% !important;
   max-width: 1200px !important;
   margin: 4rem auto 2rem !important;
@@ -248,6 +262,8 @@
 }
 
 .cta-secondary {
+  display: flex;
+  place-items: center;
   text-align: center;
   background: rgba(255, 255, 255, 0.1) !important;
   border-radius: 12px !important;
@@ -260,7 +276,7 @@
   font-size: 1.5rem !important;
 }
 
-// Section Divider
+// ! *** Section Divider *** //
 .section-divider {
   width: 80%;
   max-width: 600px;

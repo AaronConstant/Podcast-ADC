@@ -62,6 +62,7 @@ const StyledSubTypography = styled(Typography)(({ theme }) => ({
 }));
 const StyledBox = styled(Box)(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
+    width: '50%',
     padding: theme.spacing(2),
     borderRadius: theme.shape.borderRadius,
     margin: theme.spacing(3)    

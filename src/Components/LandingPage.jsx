@@ -1,8 +1,6 @@
-import React from "react";
-import { Typography, Box, Paper } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import {
   StyledBox,
-  theme,
   StyledButton,
   StyledTypography,
   StyledContainer,
@@ -20,18 +18,18 @@ export default function LandingPage() {
         <Box
           className="hero-logo"
           component="img"
-          src="src/assets/ChitChatLogo.jpg"
+          src="src/assets/CPR.png"
           alt="ChitChat Logo - AI-powered podcast creation platform"
           loading="eager"
         />
 
         <StyledPaper className="intro-container" elevation={3}>
           <StyledTypography component="h1" className="intro-heading">
-            AI Podcast Studio – Your Personalized Podcast Creator{" "}
+            AI Podcast Studio – Your Personalized Podcast Creator
           </StyledTypography>
           <Typography className="intro-text">
             🎙️ Ready to Hear What You Love? Whether you want to unwind with a
-            podcast tailored just for you or you're dreaming up a series of your
+            podcast tailored just for you or you are dreaming up a series of your
             own, you’re in the perfect place. Our AI-powered podcast generator
             creates unique, fully-voiced episodes on any topic you choose—just
             for your enjoyment. Want a relaxing story? A deep dive into a
@@ -78,7 +76,7 @@ export default function LandingPage() {
               loading="lazy"
             />
             <Typography variant="h3" className="step-title">
-              Explore
+              Imagine
             </Typography>
             <StyledPaper className="step-description" elevation={1}>
               <StyledSubTypography>
@@ -97,7 +95,7 @@ export default function LandingPage() {
               loading="lazy"
             />
             <Typography variant="h3" className="step-title">
-              Create
+              Generate
             </Typography>
             <StyledPaper className="step-description" elevation={1}>
               <StyledSubTypography>
@@ -133,7 +131,7 @@ export default function LandingPage() {
               loading="lazy"
             />
             <Typography variant="h3" className="step-title">
-              Repeat
+              Explore
             </Typography>
             <StyledPaper className="step-description" elevation={2}>
               <StyledSubTypography>

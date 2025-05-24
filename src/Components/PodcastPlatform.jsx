@@ -13,9 +13,10 @@ import {
 } from '@mui/material';
 import AudioConverter from './AudioGenerator';
 import Loading from './Loading';
-import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useParams} from 'react-router-dom';
 
-function App() {
+function PodcastPlatform() {
   const API = import.meta.env.VITE_BASE_URL;
   const {user_id} = useParams()
   const [prompt, setPrompt] = useState('');
@@ -33,11 +34,11 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    if (response) {
-      console.log('We Got Something!!', response);
-    }
-  }, [response]);
+  // useEffect(() => {
+  //   if (response) {
+  //     console.log('We Got Something!!', response);
+  //   }
+  // }, [response]);
 
   if (loading) {
     return <Loading />;
@@ -46,28 +47,25 @@ function App() {
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      console.log('Line 47-Prompt:', prompt);
-      const res = await fetch(`${API}/users/:${user_id}/podcastentries`, {
-        method: 'POST',
+      const token = localStorage.getItem('token')
+    const response = await axios.post(
+      `${API}/users/${user_id}/podcastentries/script`,
+      { podcastentry: prompt },
+      {
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, 
         },
-        body: JSON.stringify({ podcastentry: prompt }),
-      });
-      console.log("Response status from Gemini:", res.status);
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
       }
-
-      const data = await res.json();
-      console.log("Gemini response:", data);
-      setResponse(data); 
-    } catch (error) {
-      console.error('An error occurred:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    );
+    const data = response.data;
+    setResponse(data);
+  } catch (error) {
+    console.error('An error occurred:', error);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const handleConvertToAudio = () => {
     if (response) {
@@ -92,8 +90,9 @@ function App() {
 
   return (
     <div style={{ padding: '20px' }}>
-      <Typography variant='h1'>Welcome to</Typography>
+      <Typography variant='h1'>Your Personalized</Typography>
       <Typography variant="h4">Chit Chat Podcasts</Typography>
+      <Typography variant="h4">Generator</Typography>
       <TextField
         fullWidth
         label="Enter your prompt..."
@@ -146,7 +145,7 @@ function App() {
       >
         <DialogTitle>Convert Response to Audio</DialogTitle>
         <DialogContent>
-          <AudioConverter initialText={text} apiUrl={API} />
+          <AudioConverter initialText={text} apiUrl={API} user_id={user_id} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseAudioConverter} color="secondary">
@@ -158,4 +157,4 @@ function App() {
   );
 }
 
-export default App;
+export default PodcastPlatform;

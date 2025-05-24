@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import {
@@ -6,13 +5,13 @@ import {
   StyledContainer,
   StyledTypography,
   StyledPaper,
-  StyledBox,
-  StyledSubTypography,
 } from "../../Styling/theme";
 import "../../Styling/SignInStyling.scss";
 import { TextField, Typography, Alert } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import welcomeVideo from '../../assets/WelcomeBackVid.mp4'
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function SignIn() {
   const API = import.meta.env.VITE_BASE_URL;
@@ -34,7 +33,7 @@ export default function SignIn() {
     try {
       const response = await axios.post(`${API}/login`, loginInfo);
       const { token, user, message } = response.data;
-
+      console.log(user)
       localStorage.setItem("token", token);
       console.log(message);
       navigate(`/users/${user.id}/dashboard`);
@@ -58,7 +57,7 @@ export default function SignIn() {
             muted 
             playsInline
           >
-            <source src="src/assets/WelcomeBackVid.mp4" type="video/mp4" />
+            <source src={welcomeVideo} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -131,7 +130,7 @@ export default function SignIn() {
 
             <div className="signup-prompt">
               <Typography className="signup-text">
-                Don't have an account?
+                Do not have an account?
               </Typography>
               <StyledButton 
                 onClick={() => navigate("/signup")}

@@ -1,20 +1,19 @@
 import { AppBar, Box, Button, Toolbar } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "../Styling/NavbarStyling.scss";
-import { useTheme } from "@mui/material/styles";
 import { StyledButton } from "../Styling/theme.jsx";
 import CCPLogo from '../assets/RemovedCCPLogo.png';
 
 export default function NavBar() {
-  const theme = useTheme();
+  const {id} = useParams()
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsAuthenticated(!!token);
-  }, []);
+  }, [id]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -23,7 +22,7 @@ export default function NavBar() {
   };
 
   return (
-    <AppBar position="static" className='nav_bar' color="primary">
+    <AppBar position="static" className='nav_bar' color="secondary">
       <Toolbar>
         <Box component='img' src={CCPLogo} className="img_logo" />
         <Box className="nav_buttons_container">

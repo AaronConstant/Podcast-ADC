@@ -9,7 +9,7 @@ import {
   Box,
 } from "@mui/material";
 
-const AudioConverter = ({ initialText, apiUrl }) => {
+const AudioConverter = ({ initialText, apiUrl, user_id }) => {
   const [text, setText] = useState(initialText || "");
   const [audioUrl, setAudioUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +29,7 @@ const AudioConverter = ({ initialText, apiUrl }) => {
     setError("");
 
     try {
-      console.log("Sending request to:", `${apiUrl}/:user_id/podcastentries/audio`);
+      console.log("Sending request to:", `${apiUrl}/:${user_id}/podcastentries/audio`);
       console.log("Request body:", { googleCloudTTS: text });
       console.log('API Url:', apiUrl)
 

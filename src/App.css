@@ -4,7 +4,10 @@
   text-align: center;
   height: 100vh;
   width: 100vw;
-  background-color: #ebe7dd;
+font-family: "Montserrat", sans-serif !important;
+  font-optical-sizing: auto;
+  background: #f5f4ed;
+
 }
  body {
   display:grid;
