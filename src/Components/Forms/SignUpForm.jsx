@@ -12,7 +12,7 @@ import {
 } from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
-import {useAuth} from '../'
+// import {useAuth} from '../'
 // import CCPBackgroundPhoto from '../../assets/CCPSignUPPhoto.png'
 
 const API = import.meta.env.VITE_BASE_URL;

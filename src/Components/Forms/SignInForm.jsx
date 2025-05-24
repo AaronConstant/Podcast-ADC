@@ -11,7 +11,7 @@ import { TextField, Typography, Alert } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import welcomeVideo from '../../assets/WelcomeBackVid.mp4'
-import { useAuth } from "../../contexts/AuthContext";
+// import { useAuth } from "../../contexts/AuthContext";
 
 export default function SignIn() {
   const API = import.meta.env.VITE_BASE_URL;
