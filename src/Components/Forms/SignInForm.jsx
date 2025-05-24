@@ -68,7 +68,7 @@ export default function SignIn() {
           <StyledPaper className="signin-paper">
             <div className="form-header">
               <StyledTypography className="signin-title">
-                Ah! Hello Friend
+                Jump Back in!
               </StyledTypography>
               <Typography className="signin-subtitle">
                 Please sign in to your account
