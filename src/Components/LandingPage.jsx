@@ -149,7 +149,7 @@ export default function LandingPage() {
             Ready to Get Started?
           </StyledTypography>
           <Typography variant="body1" className="cta-text">
-            Join thousands of creators bringing their ideas to life
+            Join the Chit Chat Community and Bring your ideas to life! ❤️
           </Typography>
           <StyledButton
             size="large"

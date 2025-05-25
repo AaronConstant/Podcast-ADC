@@ -8,14 +8,13 @@ import {
 } from "../../Styling/theme";
 import "../../Styling/SignInStyling.scss";
 import { TextField, Typography, Alert } from "@mui/material";
-import axios from "axios";
 import { useState } from "react";
 import welcomeVideo from '../../assets/WelcomeBackVid.mp4'
-// import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function SignIn() {
-  const API = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
+  const {login} = useAuth()
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,15 +30,16 @@ export default function SignIn() {
     setError("");
     
     try {
-      const response = await axios.post(`${API}/login`, loginInfo);
-      const { token, user, message } = response.data;
-      console.log(user)
-      localStorage.setItem("token", token);
-      console.log(message);
-      navigate(`/users/${user.id}/dashboard`);
+      const result = await login(loginInfo)
+      console.log(result)
+      if(result.success) {
+        navigate(`/users/${result.user.id}/dashboard`);
+      } else {
+        setError(result.error || "Failed to Sign in. Try Again Please :(")
+      }
       reset();
     } catch (error) {
-      console.error("Error signing in:", error);
+      console.error("Error signing in: ", error);
       setError(error.response?.data?.message || "Failed to sign in. Please try again.");
     } finally {
       setIsLoading(false);

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import axios from "axios";
 
 const AuthContext = createContext();
 const API = import.meta.env.VITE_BASE_URL;
@@ -16,9 +17,10 @@ export function AuthProvider({ children }) {
     try {
       const token = localStorage.getItem("token");
       const userData = localStorage.getItem("user");
-
+      console.log("Line-20 userData in AuthContext: ", userData)
+      const parsedUser = JSON.parse(userData)
       if (token && userData) {
-        setUser(JSON.parse(userData));
+        setUser(parsedUser);
       }
     } catch (error) {
       console.error("Auth check failed:", error);
@@ -34,11 +36,17 @@ export function AuthProvider({ children }) {
       const response = await axios.post(`${API}/login`, credentials);
 
       if (response.status === 200) {
+
         const { token, user, message } = response.data;
         localStorage.setItem("token", token);
+
+        const stringifiedUser = JSON.stringify(user)
+        localStorage.setItem("user", stringifiedUser)
+        console.log(localStorage)
         setUser(user);
         setIsAuthenticated(true);
         console.log(message);
+
         return { success: true, user };
       }
     } catch (error) {
@@ -52,17 +60,16 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // const login = () => {
-  //   setIsAuthenticated(true);
-  // };
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user")
     setIsAuthenticated(false);
+    setUser(null)
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, user, loading}}>
       {children}
     </AuthContext.Provider>
   );
