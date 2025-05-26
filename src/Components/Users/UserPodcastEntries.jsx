@@ -20,7 +20,7 @@ console.log(user)
     const fetchPodcasts = async () => {
       const token = localStorage.getItem("token");
       try {
-        const response = await axios.get(`${API}/users/${id}/podcastentries`, {
+        const response = await axios.get(`${API}/users/${user.id}/podcastentries`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log(response.data)

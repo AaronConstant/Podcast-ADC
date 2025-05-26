@@ -1,14 +1,16 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 const API = import.meta.env.VITE_BASE_URL;
+
 export function AuthProvider({ children }) {
+  const navigate = useNavigate()
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-
- useEffect(() => {
+  useEffect(() => {
     checkAuthStatus();
   }, []);
 
@@ -16,9 +18,11 @@ export function AuthProvider({ children }) {
     try {
       const token = localStorage.getItem("token");
       const userData = localStorage.getItem("user");
-      console.log("Line-20 userData in AuthContext: ", userData)
-      const parsedUser = JSON.parse(userData)
+      console.log('Token Auth Line-19: ', token);
+      console.log("Line-20 userData in AuthContext: ", userData);
+      
       if (token && userData) {
+        const parsedUser = JSON.parse(userData);
         setUser(parsedUser);
       }
     } catch (error) {
@@ -35,15 +39,14 @@ export function AuthProvider({ children }) {
       const response = await axios.post(`${API}/login`, credentials);
 
       if (response.status === 200) {
-
         const { token, user, message } = response.data;
         localStorage.setItem("token", token);
-
-        const stringifiedUser = JSON.stringify(user)
-        localStorage.setItem("user", stringifiedUser)
-        console.log(localStorage)
+        localStorage.setItem("user", JSON.stringify(user));
+        console.log(message)
+        console.log("Line 44 in Auth: ",JSON.parse(localStorage.getItem('user')))
+        console.log("Locale Storage Line 46 Auth: ", localStorage);
         setUser(user);
-        console.log(message);
+        console.log("Login successful");
 
         return { success: true, user };
       }
@@ -58,13 +61,13 @@ export function AuthProvider({ children }) {
     }
   };
 
-   const isAuthenticated = !!user
-
+  const isAuthenticated = !!user;
 
   const logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user")
-    setUser(null)
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate('/')
   };
 
   return (
