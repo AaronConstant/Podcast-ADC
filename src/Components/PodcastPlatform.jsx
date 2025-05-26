@@ -13,17 +13,16 @@ import {
 import AudioConverter from './AudioGenerator';
 import Loading from './Loading';
 import axios from 'axios';
-import { useParams} from 'react-router-dom';
-
+import { useAuth } from '../contexts/AuthContext';
 function PodcastPlatform() {
   const API = import.meta.env.VITE_BASE_URL;
-  const {user_id} = useParams()
   const [prompt, setPrompt] = useState('');
-  const [response, setResponse] = useState(null);
+  const [script, setScript] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showAudioConverter, setShowAudioConverter] = useState(false);
   const [text, setText] = useState('');
   const [loading, setLoading] = useState(true);
+  const {user} = useAuth()
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -42,7 +41,7 @@ function PodcastPlatform() {
     try {
       const token = localStorage.getItem('token')
     const response = await axios.post(
-      `${API}/users/${user_id}/podcastentries/script`,
+      `${API}/users/${user.id}/podcastentries/script`,
       { podcastentry: prompt },
       {
         headers: {
@@ -51,8 +50,8 @@ function PodcastPlatform() {
         },
       }
     );
-    const data = response.data;
-    setResponse(data);
+    
+    setScript(response.data);
   } catch (error) {
     console.error('An error occurred:', error);
   } finally {
@@ -61,25 +60,29 @@ function PodcastPlatform() {
 };
 
   const handleConvertToAudio = () => {
-    if (response) {
-      const responseString = `
-        ${response.title}
-        ${response.introduction}
-         ${response.mainContent}
-         ${response.conclusion}
+    if (script) {
+      const scriptString = `
+        ${script.title}
+        ${script.description}
+        ${script.introduction}
+         ${script.mainContent}
+         ${script.conclusion}
       `;
 
-      console.log("Converted response string: ", responseString);
+      console.log("Converted script string: ", scriptString);
 
       setShowAudioConverter(true);
 
-      setText(responseString);
+      setText(scriptString);
     }
   };
 
   const handleCloseAudioConverter = () => {
     setShowAudioConverter(false);
   };
+
+  console.log("PPform Line 84 - Current script",script);
+  
 
   return (
     <div style={{ padding: '20px' }}>
@@ -108,11 +111,11 @@ function PodcastPlatform() {
         </div>
       )}
 
-      {response && !isLoading && (
+      {script && !isLoading && (
         <div style={{ marginTop: '20px' }}>
-          <Typography variant="h5">Response:</Typography>
+          <Typography variant="h5">script:</Typography>
           <Paper elevation={10} sx={{ padding: 10, margin: 2 }}>
-            {Object.entries(response).map(([key, value]) => (
+            {Object.entries(script).map(([key, value]) => (
               <Typography key={key} variant="body1" style={{ marginTop: '10px' }}>
                 <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {value}
               </Typography>
@@ -136,9 +139,9 @@ function PodcastPlatform() {
         maxWidth="md"
         fullWidth
       >
-        <DialogTitle>Convert Response to Audio</DialogTitle>
+        <DialogTitle>Convert script to Audio</DialogTitle>
         <DialogContent>
-          <AudioConverter initialText={text} apiUrl={API} user_id={user_id} />
+          <AudioConverter initialText={text} userId={user.id} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseAudioConverter} color="secondary">

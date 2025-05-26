@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
   const login = async (credentials) => {
     try {
       const response = await axios.post(`${API}/login`, credentials);
-
+      console.log(response)
       if (response.status === 200) {
         const { token, user, message } = response.data;
         localStorage.setItem("token", token);

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   TextField,
   Button,
@@ -8,12 +9,16 @@ import {
   Paper,
   Box,
 } from "@mui/material";
+import { useAuth } from "../contexts/AuthContext";
 
-const AudioConverter = ({ initialText, apiUrl, user_id }) => {
+const AudioConverter = ({ initialText}) => {
+  const API = import.meta.env.VITE_BASE_URL
+  const { user } = useAuth();
   const [text, setText] = useState(initialText || "");
   const [audioUrl, setAudioUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
 
   useEffect(() => {
     setText(initialText || "");
@@ -29,29 +34,32 @@ const AudioConverter = ({ initialText, apiUrl, user_id }) => {
     setError("");
 
     try {
-      console.log("Sending request to:", `${apiUrl}/:${user_id}/podcastentries/audio`);
-      console.log("Request body:", { googleCloudTTS: text });
-      console.log('API Url:', apiUrl)
-
-      const response = await fetch(`${apiUrl}/:user_id/podcastentries/audio`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      console.log("AG 40 - Request body:", { googleCloudTTS: text });
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `${API}/users/${user.id}/podcastentries/audio`,
+        {
           googleCloudTTS: text,
-        }),
-      });
-      console.log("Line: 45 - Text being sent back!:",text)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          responseType: 'blob'
 
-      if (response.ok) {
+        }
+      );
+      console.log(response)
+      console.log("Line: 45 - Text being sent back!:", text);
+
+      if (response.status === 200) {
         const blob = await response.blob();
         const audioUrl = URL.createObjectURL(blob);
 
         setAudioUrl(audioUrl);
+      } else {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
       console.log("Audio URL: ", audioUrl);
