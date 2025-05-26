@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { theme,
@@ -9,17 +9,13 @@ import { theme,
          StyledPaper,
          StyledSubTypography
         } from '../../Styling/theme'
-import PodcastPlatform from "../PodcastPlatform";
-
+import { useAuth } from "../../contexts/AuthContext";
 export default function UserPodcastEntries() {
   const { id } = useParams();
+  const {user} = useAuth()
   const API = import.meta.env.VITE_BASE_URL;
   const [userPodcast, setUserPodcastEntries] = useState([]);
-  // const [error, setError] = useState(null);
-  const [userInfo, setUserInfo] = useState(null);
-  // This will be the design page for the Podcast Entries
-  // Styling, positioning as a component, etc.
-
+console.log(user)
   useEffect(() => {
     const fetchPodcasts = async () => {
       const token = localStorage.getItem("token");
@@ -27,24 +23,24 @@ export default function UserPodcastEntries() {
         const response = await axios.get(`${API}/users/${id}/podcastentries`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-
+        console.log(response.data)
         setUserPodcastEntries(response.data);
       } catch (error) {
         console.log("Error retrieving podcasts: ", error);
       }
     };
-    const userInfo = async () => {
-      const token = localStorage.getItem("token");
-      try {
-        const response = await axios.get(`${API}/users/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUserInfo(response.data);
-      } catch (error) {
-        console.log("Error retrieving: ", error);
-      }
-    };
-    userInfo();
+    // const userInfo = async () => {
+    //   const token = localStorage.getItem("token");
+    //   try {
+    //     const response = await axios.get(`${API}/users/${id}`, {
+    //       headers: { Authorization: `Bearer ${token}` },
+    //     });
+    //     setUserInfo(response.data);
+    //   } catch (error) {
+    //     console.log("Error retrieving: ", error);
+    //   }
+    // };
+    // userInfo();
     fetchPodcasts();
   }, [id]);
 
@@ -71,10 +67,6 @@ export default function UserPodcastEntries() {
   }
   return (
     <div>
-      <StyledContainer>
-        <PodcastPlatform/>
-      </StyledContainer>
-
     <StyledContainer>
       {userPodcast.map((podcast) => (
         <div key={podcast.id}>{podcast.title}</div>

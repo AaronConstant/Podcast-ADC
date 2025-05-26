@@ -6,7 +6,7 @@ import NavBar from './Components/NavBar'
 import SignIn from './Components/Forms/SignInForm'
 import SignUp from './Components/Forms/SignUpForm'
 import UserDashboard from './Components/Users/UserDashboard'
-import UserPodcastEntries from './Components/Users/UserPodcastEntries'
+// import UserPodcastEntries from './Components/Users/UserPodcastEntries'
 import AboutUs from  './Components/AboutUs'
 import Contact from './Components/Contact'
 
@@ -16,7 +16,7 @@ export default function Apps() {
     <NavBar/>
     <Routes>
       <Route path='/' element ={<LandingPage/>}/>
-    <Route path='/home' element={<UserPodcastEntries />}/>
+    {/* <Route path='/home' element={<UserPodcastEntries />}/> */}
     <Route path='/login' element={<SignIn />}/>
     <Route path='/signup' element={<SignUp />}/>
     <Route path ='/users/:id/dashboard' element = {<UserDashboard/>}/>

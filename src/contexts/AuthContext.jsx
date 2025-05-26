@@ -5,7 +5,6 @@ const AuthContext = createContext();
 const API = import.meta.env.VITE_BASE_URL;
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
 
@@ -44,7 +43,6 @@ export function AuthProvider({ children }) {
         localStorage.setItem("user", stringifiedUser)
         console.log(localStorage)
         setUser(user);
-        setIsAuthenticated(true);
         console.log(message);
 
         return { success: true, user };
@@ -60,11 +58,12 @@ export function AuthProvider({ children }) {
     }
   };
 
+   const isAuthenticated = !!user
+
 
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user")
-    setIsAuthenticated(false);
     setUser(null)
   };
 

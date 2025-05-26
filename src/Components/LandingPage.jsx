@@ -9,6 +9,11 @@ import {
 } from "../Styling/theme";
 import "../Styling/LandingPage.scss";
 import { Link } from "react-router-dom";
+import CCPImagine from '../assets/CCPIconThink.png'
+import CCPWrite from '../assets/CCPIconWrite.png';
+import CCPListen from '../assets/CCPIconListen.png';
+import CCPRepeat from '../assets/CCPIconRepeat.png';
+import CPRLogo from '../assets/CPR.png';
 
 export default function LandingPage() {
   return (
@@ -18,7 +23,7 @@ export default function LandingPage() {
         <Box
           className="hero-logo"
           component="img"
-          src="src/assets/CPR.png"
+          src={CPRLogo}
           alt="ChitChat Logo - AI-powered podcast creation platform"
           loading="eager"
         />
@@ -71,7 +76,7 @@ export default function LandingPage() {
             <Box
               component="img"
               className="process-icon"
-              src="src/assets/CCPIconThink.png"
+              src={CCPImagine}
               alt="Think - Brainstorm your podcast idea"
               loading="lazy"
             />
@@ -90,7 +95,7 @@ export default function LandingPage() {
             <Box
               component="img"
               className="process-icon"
-              src="src/assets/CCPIconWrite.png"
+            src={CCPWrite}
               alt="Create - AI generates your podcast content"
               loading="lazy"
             />
@@ -108,7 +113,7 @@ export default function LandingPage() {
             <Box
               component="img"
               className="process-icon"
-              src="src/assets/CCPIconListen.png"
+              src={CCPListen}
               alt="Listen - Enjoy your generated podcast"
               loading="lazy"
             />
@@ -126,7 +131,7 @@ export default function LandingPage() {
             <Box
               component="img"
               className="process-icon"
-              src="src/assets/CCPIconRepeat.png"
+              src={CCPRepeat}
               alt="Repeat - Create unlimited podcasts"
               loading="lazy"
             />

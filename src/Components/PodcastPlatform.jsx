@@ -34,12 +34,6 @@ function PodcastPlatform() {
     return () => clearTimeout(timer);
   }, []);
 
-  // useEffect(() => {
-  //   if (response) {
-  //     console.log('We Got Something!!', response);
-  //   }
-  // }, [response]);
-
   if (loading) {
     return <Loading />;
   }

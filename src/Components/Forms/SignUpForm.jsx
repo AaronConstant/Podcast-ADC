@@ -4,16 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { StyledButton, StyledTypography, StyledBox } from "../../Styling/theme";
 import "../../Styling/SignUpStyling.scss";
 import { InputAdornment, IconButton, Alert, Paper } from "@mui/material";
-import {
-  Visibility,
-  VisibilityOff,
-  Email,
-  Lock,
-} from "@mui/icons-material";
+import { Visibility, VisibilityOff, Email, Lock } from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
-// import {useAuth} from '../'
-// import CCPBackgroundPhoto from '../../assets/CCPSignUPPhoto.png'
 
 const API = import.meta.env.VITE_BASE_URL;
 
@@ -23,18 +16,6 @@ export default function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
-  // const [newUser, setNewUser] = useState({
-  //   first_name: "",
-  //   last_name: "",
-  //   username: "",
-  //   password: "",
-  //   email: "",
-  //   phone_number: "",
-  //   sex_at_birth: "",
-  //   gender_identity: "",
-  //   date_of_birth: "",
-  // });
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -88,6 +69,7 @@ export default function SignUp() {
       console.log("User: ", user);
       console.log("User created successfully:", message);
       localStorage.setItem("token", token);
+      console.log(user);
       navigate(`/users/${user.id}/dashboard`);
     } catch (error) {
       console.error("Error creating user:", error);
@@ -288,7 +270,7 @@ export default function SignUp() {
               }}
             />
           </StyledBox>
-
+          
           <StyledButton
             type="submit"
             className="submitBtn"
