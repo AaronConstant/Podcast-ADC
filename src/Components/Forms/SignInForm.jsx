@@ -31,7 +31,6 @@ export default function SignIn() {
     
     try {
       const result = await login(loginInfo)
-      console.log(result)
       if(result.success) {
         navigate(`/users/${result.user.id}/dashboard`);
       } else {

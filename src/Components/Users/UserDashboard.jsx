@@ -1,6 +1,7 @@
 import UserPodcastEntries from './UserPodcastEntries'
 // import { useAuth } from '../../contexts/AuthContext'
 import PodcastPlatform from '../PodcastPlatform'
+import '../../Styling/dashboardStyling.scss'
 import { theme,
          StyledBox,
          StyledButton,
@@ -18,7 +19,7 @@ export default function UserDashboard() {
     
     
   return (
-    <div className='dashboard_container'>UserDashboard
+    <div className='dashboard_container'>
       <StyledContainer>
         <PodcastPlatform/>
       </StyledContainer>

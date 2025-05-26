@@ -6,7 +6,7 @@ const AuthContext = createContext();
 const API = import.meta.env.VITE_BASE_URL;
 
 export function AuthProvider({ children }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -18,9 +18,7 @@ export function AuthProvider({ children }) {
     try {
       const token = localStorage.getItem("token");
       const userData = localStorage.getItem("user");
-      console.log('Token Auth Line-19: ', token);
-      console.log("Line-20 userData in AuthContext: ", userData);
-      
+
       if (token && userData) {
         const parsedUser = JSON.parse(userData);
         setUser(parsedUser);
@@ -37,14 +35,10 @@ export function AuthProvider({ children }) {
   const login = async (credentials) => {
     try {
       const response = await axios.post(`${API}/login`, credentials);
-      console.log(response)
       if (response.status === 200) {
-        const { token, user, message } = response.data;
+        const { token, user } = response.data;
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
-        console.log(message)
-        console.log("Line 44 in Auth: ",JSON.parse(localStorage.getItem('user')))
-        console.log("Locale Storage Line 46 Auth: ", localStorage);
         setUser(user);
         console.log("Login successful");
 
@@ -67,11 +61,13 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
-    navigate('/')
+    navigate("/");
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, user, loading}}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, login, logout, user, loading }}
+    >
       {children}
     </AuthContext.Provider>
   );

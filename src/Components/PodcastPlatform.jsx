@@ -20,7 +20,6 @@ function PodcastPlatform() {
   const [script, setScript] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showAudioConverter, setShowAudioConverter] = useState(false);
-  const [text, setText] = useState('');
   const [loading, setLoading] = useState(true);
   const {user} = useAuth()
 
@@ -50,7 +49,7 @@ function PodcastPlatform() {
         },
       }
     );
-    
+    localStorage.setItem('script', JSON.stringify(response.data))
     setScript(response.data);
   } catch (error) {
     console.error('An error occurred:', error);
@@ -60,21 +59,8 @@ function PodcastPlatform() {
 };
 
   const handleConvertToAudio = () => {
-    if (script) {
-      const scriptString = `
-        ${script.title}
-        ${script.description}
-        ${script.introduction}
-         ${script.mainContent}
-         ${script.conclusion}
-      `;
-
-      console.log("Converted script string: ", scriptString);
 
       setShowAudioConverter(true);
-
-      setText(scriptString);
-    }
   };
 
   const handleCloseAudioConverter = () => {
@@ -110,7 +96,7 @@ function PodcastPlatform() {
           <CircularProgress />
         </div>
       )}
-
+      {/* Display for script Information */}
       {script && !isLoading && (
         <div style={{ marginTop: '20px' }}>
           <Typography variant="h5">script:</Typography>
@@ -141,7 +127,7 @@ function PodcastPlatform() {
       >
         <DialogTitle>Convert script to Audio</DialogTitle>
         <DialogContent>
-          <AudioConverter initialText={text} userId={user.id} />
+          <AudioConverter script={script} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseAudioConverter} color="secondary">
