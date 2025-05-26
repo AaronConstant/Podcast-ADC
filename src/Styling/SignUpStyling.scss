@@ -14,19 +14,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10em;
   box-sizing: border-box;
   width: 100% !important;
   background: linear-gradient(135deg, #f0e5c6 0%, #ebe7dd 100%);
 }
 
 .form-header {
-    padding-top: 4em;
+    padding-top: 2em;
+    margin: 0 !important;
 }
 
 .paper-container {
   border-radius: 20px !important;
   margin: 6em;
+    height: 80% !important;
+
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1) !important;
   animation: slideInRight 1.5s ease-out;
 }
@@ -43,10 +45,12 @@
 
 .signup-input {
   padding: 0 !important;
-  width: 14vw !important;
+  margin: 0 !important;
+  width: 16vw !important;
   .MuiOutlinedInput-root {
     border-radius: 12px;
     height: 56px;
+    padding: 1em;
     background-color: rgba(248, 249, 250, 0.8);
 
     &:hover .MuiOutlinedInput-notchedOutline {
@@ -60,7 +64,7 @@
     }
 
     .MuiOutlinedInput-input {
-      padding: 16px 14px;
+     
       font-size: 1rem;
     }
   }
@@ -68,12 +72,13 @@
 
 .form {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); // Two equal-width columns
-  //   gap: 1.5rem; // Space between inputs
-  //   width: 60vw; // Adjusted for two columns
+  grid-template-columns: repeat(2, 1fr); 
+  //   gap: 1.5rem;
+  //   width: 60vw;
+  
   max-width: 900px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   box-sizing: border-box;
 }
 
