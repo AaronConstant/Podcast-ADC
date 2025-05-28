@@ -9,7 +9,8 @@ import {
   ListItem,
   ListItemText,
   useMediaQuery,
-  useTheme
+  useTheme,
+  LinkComponent
 } from "@mui/material";
 import { useState } from "react";
 import { Menu as MenuIcon, Close as CloseIcon } from "@mui/icons-material";
@@ -142,6 +143,7 @@ export default function NavBar() {
                     <StyledButton
                       LinkComponent={Link}
                       to={`/users/${user.id}/dashboard`}
+                      sx={{padding: '0.4em 2em '}}
                       fullWidth
                     >
                       Dashboard

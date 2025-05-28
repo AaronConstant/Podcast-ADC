@@ -1,6 +1,10 @@
 .nav_bar {
   z-index: 1100;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .dashboard_button{
+    padding: 4px !important;
+  }
   
   .custom-toolbar {
     padding-left: 0 !important;

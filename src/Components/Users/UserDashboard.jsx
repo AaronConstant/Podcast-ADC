@@ -11,11 +11,8 @@ import { theme,
          StyledSubTypography
         } from '../../Styling/theme'
 
-// have a state watching the log-out button (when created) to erase localstorage with token contain within it localStorage.clear() <-- :).
 export default function UserDashboard() {
   // const {user} = useAuth()
-  //   console.log(user.id);
-  //   console.log("Token: ",localStorage.getItem('token'));
     
     
   return (

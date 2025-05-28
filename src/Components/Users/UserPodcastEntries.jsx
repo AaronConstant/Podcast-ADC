@@ -18,7 +18,7 @@ export default function UserPodcastEntries() {
   const [userPodcast, setUserPodcastEntries] = useState([]);
     const [error, setError] = useState(null);
 
-console.log(user)
+
   useEffect(() => {
     const fetchPodcasts = async () => {
       const token = localStorage.getItem("token");
@@ -36,15 +36,15 @@ console.log(user)
     };
     fetchPodcasts();
 
-     const interval = setInterval(() => {
-      if (user?.id) {
-        fetchPodcasts();
-      }
-    }, 15000); 
+    //  const interval = setInterval(() => {
+    //   if (user?.id) {
+    //     fetchPodcasts();
+    //   }
+    // }, 15000); 
 
-    return () => clearInterval(interval);
+    // return () => clearInterval(interval);
     
-  }, [user.id, API]);
+  }, [user.id]);
 
 
 
@@ -92,7 +92,7 @@ console.log(user)
             )}
             {podcast.audio_url && (
               <audio controls style={{ width: '100%', marginTop: '10px' }}>
-                {console.log(podcast.url)}
+                {console.log("Line 95 UPE Url: ",podcast.url)}
                 <source src={podcast.audio_url} type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>

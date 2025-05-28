@@ -7,10 +7,12 @@ import { InputAdornment, IconButton, Alert, Paper } from "@mui/material";
 import { Visibility, VisibilityOff, Email, Lock } from "@mui/icons-material";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
+import { useAuth } from "../../contexts/AuthContext";
 
 const API = import.meta.env.VITE_BASE_URL;
 
 export default function SignUp() {
+  const { setUser } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -66,17 +68,15 @@ export default function SignUp() {
       });
 
       const { token, user, message } = response.data;
-      console.log("Line-69 SignUP User: ", user);
-      console.log("Line-70 SignUP Message Received: ", message);
       localStorage.setItem("token", token);
-       const token1 = localStorage.getItem("token");
-       console.log("Line-73 SignUP token saved: ", token1)
-       localStorage.setItem("user", JSON.stringify(user));
-       const userData = localStorage.getItem("user");
-      console.log("Line-76 SignUP User saved in token: ", userData)
 
-      console.log(user);
-      navigate(`/users/${user.id}/dashboard`);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      setUser(user);
+
+      setTimeout(() => {
+        navigate(`/users/${user.id}/dashboard`);
+      }, [5000]);
     } catch (error) {
       console.error("Error creating user:", error);
       setError(
@@ -93,8 +93,8 @@ export default function SignUp() {
   //     return value.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
   //   }
   // };
-  
-console.log("Auth User: ", user);
+
+  // console.log("Auth User: ", user);
 
   return (
     <div className="signup-page">
@@ -278,7 +278,7 @@ console.log("Auth User: ", user);
               }}
             />
           </StyledBox>
-          
+
           <StyledButton
             type="submit"
             className="submitBtn"
