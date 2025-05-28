@@ -18,7 +18,7 @@ export default function UserPodcastEntries() {
   const [userPodcast, setUserPodcastEntries] = useState([]);
     const [error, setError] = useState(null);
 
-
+console.log(user)
   useEffect(() => {
     const fetchPodcasts = async () => {
       const token = localStorage.getItem("token");

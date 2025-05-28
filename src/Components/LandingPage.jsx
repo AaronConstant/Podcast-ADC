@@ -14,8 +14,10 @@ import CCPWrite from '../assets/CCPIconWrite.png';
 import CCPListen from '../assets/CCPIconListen.png';
 import CCPRepeat from '../assets/CCPIconRepeat.png';
 import CPRLogo from '../assets/CPR.png';
+import { useAuth } from "../contexts/AuthContext";
 
 export default function LandingPage() {
+  const {user, isAuthenticated } = useAuth()
   return (
     <Box className="landing-page-container">
       {/* Hero Section */}
@@ -46,8 +48,8 @@ export default function LandingPage() {
           </Typography>
           <Typography className="intro-text">
             Dive into <strong>true crime</strong>, explore tech trends, tell
-            <strong>sci-fi stories</strong>, or host mock interviews with
-            <strong>historical figures</strong>! Just type your idea, and let
+            <strong> sci-fi stories</strong>, or host mock interviews with
+            <strong> historical figures</strong>! Just type your idea, and let
             the AI take it from there.
           </Typography>
           <Box className="intro-cta">
@@ -55,7 +57,7 @@ export default function LandingPage() {
               size="large"
               className="cta-button"
               LinkComponent={Link}
-              to="/signup"
+              to={isAuthenticated ? `/users/${user.id}/dashboard`: '/signup'}
             >
               Start Creating Now 🎧
             </StyledButton>

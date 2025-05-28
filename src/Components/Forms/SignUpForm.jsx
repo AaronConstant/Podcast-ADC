@@ -51,7 +51,7 @@ export default function SignUp() {
 
     try {
       const response = await axios.post(`${API}/users`, formattedData);
-      console.log("User created successfully:", response.data);
+      console.log("User created successfully: ", response.data);
 
       reset({
         first_name: "",
@@ -66,9 +66,15 @@ export default function SignUp() {
       });
 
       const { token, user, message } = response.data;
-      console.log("User: ", user);
-      console.log("User created successfully:", message);
+      console.log("Line-69 SignUP User: ", user);
+      console.log("Line-70 SignUP Message Received: ", message);
       localStorage.setItem("token", token);
+       const token1 = localStorage.getItem("token");
+       console.log("Line-73 SignUP token saved: ", token1)
+       localStorage.setItem("user", JSON.stringify(user));
+       const userData = localStorage.getItem("user");
+      console.log("Line-76 SignUP User saved in token: ", userData)
+
       console.log(user);
       navigate(`/users/${user.id}/dashboard`);
     } catch (error) {
@@ -87,6 +93,8 @@ export default function SignUp() {
   //     return value.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
   //   }
   // };
+  
+console.log("Auth User: ", user);
 
   return (
     <div className="signup-page">

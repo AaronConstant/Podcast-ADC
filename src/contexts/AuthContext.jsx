@@ -19,8 +19,10 @@ export function AuthProvider({ children }) {
       const token = localStorage.getItem("token");
       const userData = localStorage.getItem("user");
 
+      console.log("Auth Line 22 - User Data received: ",userData)
       if (token && userData) {
         const parsedUser = JSON.parse(userData);
+        console.log("Auth Line 25 parsedUser: ", parsedUser)
         setUser(parsedUser);
       }
     } catch (error) {
@@ -63,7 +65,7 @@ export function AuthProvider({ children }) {
     setUser(null);
     navigate("/");
   };
-
+console.log("User Auth: ", user)
   return (
     <AuthContext.Provider
       value={{ isAuthenticated, login, logout, user, loading }}

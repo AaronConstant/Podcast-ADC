@@ -1,34 +1,139 @@
 .nav_bar {
+  z-index: 1100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  .custom-toolbar {
+    padding-left: 0 !important;
+  }
+
+  .logo_container {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    
+    &:hover {
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+  }
 
   .nav_buttons_container {
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     gap: 20px;
+
+    .nav_links {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
 
     .nav_buttons {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       color: aliceblue;
+      white-space: nowrap;
+      margin-left: 24px;
+      padding: 8px 16px ;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
     }
 
     .sign_forms {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       gap: 10px;
-      padding: 10px;
-      margin: 10px;
+      margin-left: auto;
     }
   }
+
   .img_logo {
-    width: 9em;
+    width: 5em;
     height: auto;
-    display: "block";
+    display: block;
     max-width: 100%;
-    border-radius: 20%;
     margin: 0;
     padding: 0;
+    object-fit: contain;
+  }
+
+  .mobile_menu_button {
+    margin-left: auto;
   }
 }
+
+.mobile_drawer_container {
+  .MuiDrawer-paper {
+    width: 280px;
+    background-color: rgba(68, 215, 215, 0.808);
+    color: white;
+  }
+}
+
+.mobile_drawer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .drawer_header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .mobile_nav_item {
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .MuiListItemText-primary {
+      font-weight: 500;
+    }
+  }
+
+  .mobile_auth_buttons {
+    margin-top: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .mobile_auth_btn {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .nav_bar {
+    .img_logo {
+      width: 5em;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .nav_bar {
+    .img_logo {
+      width: 4em;
+    }
+  }
+}
+
+body {
+  padding-top: 0;
+}
+
