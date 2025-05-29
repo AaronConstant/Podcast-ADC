@@ -1,0 +1,17 @@
+.loading_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: auto;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  background-image: url('../assets/LoadingCCP.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.loading_box.visible {
+  opacity: 1;
+}

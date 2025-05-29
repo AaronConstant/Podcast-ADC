@@ -1,4 +1,4 @@
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Paper } from "@mui/material";
 import {
   StyledBox,
   StyledButton,
@@ -30,7 +30,7 @@ export default function LandingPage() {
           loading="eager"
         />
 
-        <StyledPaper className="intro-container" elevation={3}>
+        <StyledBox className="intro-container" elevation={3}>
           <StyledTypography component="h1" className="intro-heading">
             AI Podcast Studio – Your Personalized Podcast Creator
           </StyledTypography>
@@ -62,7 +62,7 @@ export default function LandingPage() {
               Start Creating Now 🎧
             </StyledButton>
           </Box>
-        </StyledPaper>
+        </StyledBox>
       </Box>
 
       <hr className="section-divider" />
@@ -70,10 +70,10 @@ export default function LandingPage() {
       {/*Order of Operation Section */}
       <Box className="how-it-works-section">
         <StyledTypography component="h2" className="section-title">
-          How It Works
+          Broaden Your Horizon
         </StyledTypography>
 
-        <StyledPaper className="grid-layout-marketing" elevation={2}>
+        <Paper className="grid-layout-marketing" elevation={10}>
           <Box className="grid-item" tabIndex="0" role="button">
             <Box
               component="img"
@@ -146,7 +146,7 @@ export default function LandingPage() {
               </StyledSubTypography>
             </StyledPaper>
           </Box>
-        </StyledPaper>
+        </Paper>
       </Box>
 
       {/* CTA Section */}

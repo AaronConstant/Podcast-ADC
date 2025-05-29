@@ -142,8 +142,7 @@ useEffect(() => {
   };
 
   return (
-    <Container maxWidth="md">
-      <Paper elevation={3} sx={{ padding: 4, marginTop: 4 }}>
+    <Container fullWidth>
         <Typography variant="h4" align="center" gutterBottom>
           Text-to-Speech Converter
         </Typography>
@@ -209,7 +208,6 @@ useEffect(() => {
             Podcast saved successfully!
           </Typography>
         )}
-      </Paper>
     </Container>
   );
 };

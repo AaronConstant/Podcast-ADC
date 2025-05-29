@@ -11,7 +11,7 @@ import {
   StyledSubTypography,
 } from "../../Styling/theme";
 import { useAuth } from "../../contexts/AuthContext";
-import "../../Styling/userPodcastStyling.scss";
+import "../../Styling/EntriesStyling.scss";
 export default function UserPodcastEntries() {
   const { user } = useAuth();
   const API = import.meta.env.VITE_BASE_URL;
@@ -29,7 +29,8 @@ export default function UserPodcastEntries() {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        setUserPodcastEntries(response.data);
+        
+        response.data.length === 0? setUserPodcastEntries([]): setUserPodcastEntries(response.data);
       } catch (error) {
         console.log("Error retrieving podcasts: ", error);
       }
@@ -71,7 +72,7 @@ export default function UserPodcastEntries() {
 
   if (userPodcast.length === 0) {
     return (
-      <StyledContainer>
+      <StyledContainer className="entry_container">
         <h1>{user.firstName}'s Podcasts</h1>
         <p>No Podcasts yet. Create your first one!</p>
         {/* <StyledButton onClick={refreshPodcasts}>
@@ -81,7 +82,7 @@ export default function UserPodcastEntries() {
     );
   }
   return (
-    <div>
+    <div className="entry_container">
       <StyledContainer>
         
         {userPodcast.map((podcast) => (

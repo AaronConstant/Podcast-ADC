@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
   Typography,
   TextField,
@@ -9,70 +9,73 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-} from '@mui/material';
-import AudioConverter from './AudioGenerator';
-import Loading from './Loading';
-import axios from 'axios';
-import { useAuth } from '../contexts/AuthContext';
+} from "@mui/material";
+import {
+  StyledBox,
+  StyledButton,
+  StyledTypography,
+  StyledContainer,
+  StyledPaper,
+  StyledSubTypography,
+} from "../Styling/theme";
+import AudioConverter from "./AudioGenerator";
+import axios from "axios";
+import { useAuth } from "../contexts/AuthContext";
+import "../Styling/PodcastPlatformStyling.scss";
 function PodcastPlatform() {
   const API = import.meta.env.VITE_BASE_URL;
-  const [prompt, setPrompt] = useState('');
+  const [prompt, setPrompt] = useState("");
   const [script, setScript] = useState(null);
+  const [isScript, setIsScript] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showAudioConverter, setShowAudioConverter] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const {user} = useAuth()
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return <Loading />;
-  }
+  const { user } = useAuth();
 
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      const token = localStorage.getItem('token')
-    const response = await axios.post(
-      `${API}/users/${user.id}/podcastentries/script`,
-      { podcastentry: prompt },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, 
-        },
-      }
-    );
-    localStorage.setItem('script', JSON.stringify(response.data))
-    setScript(response.data);
-  } catch (error) {
-    console.error('An error occurred:', error);
-  } finally {
-    setIsLoading(false);
-  }
-};
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `${API}/users/${user.id}/podcastentries/script`,
+        { podcastentry: prompt },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      localStorage.setItem("script", JSON.stringify(response.data));
+      setScript(response.data);
+      handleShowScript();
+    } catch (error) {
+      console.error("An error occurred:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleShowScript = () => {
+    setIsScript(true);
+  };
+
+  const handleCloseScript = () => {
+    setIsScript(false);
+  };
 
   const handleConvertToAudio = () => {
-
-      setShowAudioConverter(true);
+    setShowAudioConverter(true);
   };
 
   const handleCloseAudioConverter = () => {
     setShowAudioConverter(false);
   };
 
-  console.log("PPform Line 84 - Current script",script);
-  
+  console.log("PPform Line 84 - Current script", script);
 
   return (
-    <div style={{ padding: '20px' }}>
-      <Typography variant='h1'>Your Personalized</Typography>
+    <div className="generator_container" style={{ padding: "20px" }}>
+      <StyledTypography>Your Personalized</StyledTypography>
       <Typography variant="h4">Chit Chat Podcasts</Typography>
       <Typography variant="h4">Generator</Typography>
       <TextField
@@ -80,48 +83,67 @@ function PodcastPlatform() {
         label="Enter your prompt..."
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
-        style={{ margin: '20px 0' }}
+        style={{ margin: "20px 0" }}
       />
-      <Button
+      <StyledButton
         variant="contained"
         color="secondary"
         onClick={handleSubmit}
         disabled={isLoading}
       >
         Create Prompt
-      </Button>
+      </StyledButton>
 
       {isLoading && (
-        <div style={{ marginTop: '20px' }}>
+        <div style={{ marginTop: "20px" }}>
           <CircularProgress />
         </div>
       )}
       {/* Display for script Information */}
       {script && !isLoading && (
-        <div style={{ marginTop: '20px' }}>
-          <Typography variant="h5">script:</Typography>
-          <Paper elevation={10} sx={{ padding: 10, margin: 2 }}>
+        <Dialog
+        className="dialog_container"
+          style={{ marginTop: "20px" }}
+          open={isScript}
+          onClose={handleCloseAudioConverter}
+          maxWidth="md"
+          fullWidth
+        >
+          <DialogTitle variant="h5">
+            <StyledTypography>Script:</StyledTypography>
+          </DialogTitle>
+          <DialogContent elevation={10} sx={{ padding: 10, margin: 2 }}>
             {Object.entries(script).map(([key, value]) => (
-              <Typography key={key} variant="body1" style={{ marginTop: '10px' }}>
-                <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {value}
+              <Typography
+                key={key}
+                variant="body1"
+                style={{ marginTop: "10px" }}
+              >
+                <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong>{" "}
+                {value}
               </Typography>
             ))}
-          </Paper>
-
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleConvertToAudio}
-            style={{ marginTop: '20px' }}
-          >
-            Convert to Audio ?
-          </Button>
-        </div>
+          </DialogContent>
+          <DialogActions className="button_container">
+            <StyledButton
+              variant="contained"
+              color="secondary"
+              onClick={handleConvertToAudio}
+              // style={{ marginTop: "20px", width: '20px' }}
+            >
+              Convert to Audio ?
+            </StyledButton>
+            <StyledButton onClick={handleCloseScript} color="warning">
+              Try Again
+            </StyledButton>
+          </DialogActions>
+        </Dialog>
       )}
 
       <Dialog
         open={showAudioConverter}
         onClose={handleCloseAudioConverter}
+        className="dialog_container"
         maxWidth="md"
         fullWidth
       >
@@ -130,9 +152,9 @@ function PodcastPlatform() {
           <AudioConverter script={script} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseAudioConverter} color="secondary">
-            Close
-          </Button>
+          <StyledButton onClick={handleCloseAudioConverter} color="primary">
+            Try Again
+          </StyledButton>
         </DialogActions>
       </Dialog>
     </div>

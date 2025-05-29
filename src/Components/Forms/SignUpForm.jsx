@@ -69,7 +69,8 @@ export default function SignUp() {
 
       const { token, user, message } = response.data;
       localStorage.setItem("token", token);
-
+      console.log("Message Received Sign Up: ", message);
+      
       localStorage.setItem("user", JSON.stringify(user));
 
       setUser(user);

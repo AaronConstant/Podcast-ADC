@@ -1,3 +1,12 @@
 .dashboard_container {
-    height:100vh
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+    background: linear-gradient(0deg,rgba(34, 193, 195, 1) 10%, rgb(246, 243, 226) 60%);
+
+    .genarator_and_pdocasts_container {
+        display: flex;
+        height: auto;
+    }
 }
