@@ -1,6 +1,6 @@
 #root {
   margin: 0 auto;
-  padding: 0;
+  padding: 0 !important;
   text-align: center;
   height: 100vh;
   width: 100vw;

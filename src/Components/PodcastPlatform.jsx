@@ -129,7 +129,6 @@ function PodcastPlatform() {
               variant="contained"
               color="secondary"
               onClick={handleConvertToAudio}
-              // style={{ marginTop: "20px", width: '20px' }}
             >
               Convert to Audio ?
             </StyledButton>

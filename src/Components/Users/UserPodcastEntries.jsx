@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import {
-  theme,
-  StyledBox,
   StyledButton,
   StyledTypography,
   StyledContainer,
-  StyledPaper,
   StyledSubTypography,
 } from "../../Styling/theme";
+import { Paper } from "@mui/material";
 import { useAuth } from "../../contexts/AuthContext";
 import "../../Styling/EntriesStyling.scss";
 export default function UserPodcastEntries() {
@@ -86,7 +84,7 @@ export default function UserPodcastEntries() {
       <StyledContainer>
         
         {userPodcast.map((podcast) => (
-          <StyledPaper key={podcast.id} style={{ margin: '10px 0', padding: '15px' }}>
+          <Paper key={podcast.id} style={{ margin: '10px 0', padding: '15px' }}>
             <StyledTypography variant="h6">{podcast.title}</StyledTypography>
             {podcast.description && (
               <StyledSubTypography>{podcast.description}</StyledSubTypography>
@@ -107,7 +105,7 @@ export default function UserPodcastEntries() {
                 Delete
               </StyledButton>
             </div>
-          </StyledPaper>
+          </Paper>
         ))}
       </StyledContainer>
     </div>

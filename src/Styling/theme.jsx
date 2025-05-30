@@ -7,7 +7,7 @@ const theme = createTheme({
             main: 'rgb(62, 211, 222)', 
         },
         secondary: {
-            main: 'rgb(32, 61, 160)', 
+            main: 'rgb(32, 62, 160)', 
         },
         error: {
             main: 'rgb(210, 62, 51)',
@@ -21,6 +21,9 @@ const theme = createTheme({
         success: {
             main: 'rgb(21, 156, 21)', 
         },
+        customNavColor: {
+            main: 'rgba(32, 62, 160, 0.83)'
+        }
     },
 });
 
@@ -68,5 +71,5 @@ const StyledBox = styled(Box)(({ theme }) => ({
     margin: theme.spacing(3)    
 }));
 
-export { StyledBox,theme,StyledButton, StyledTypography, StyledContainer, StyledPaper,StyledSubTypography};
+export { StyledBox, theme, StyledButton, StyledTypography, StyledContainer, StyledPaper,StyledSubTypography};
 

@@ -10,22 +10,38 @@ import {
   ListItemText,
   useMediaQuery,
   useTheme,
-  LinkComponent
+  LinkComponent,
 } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu as MenuIcon, Close as CloseIcon } from "@mui/icons-material";
 import { StyledButton } from "../Styling/theme.jsx";
 import { Link } from "react-router-dom";
 import "../Styling/NavbarStyling.scss";
-import CCPLogo2 from "../assets/CCPLoggo.jpg";
 import { useAuth } from "../contexts/AuthContext.jsx";
+import CCPnewLogo from "../assets/CCPnewLOGO.png";
 
 export default function NavBar() {
   const { isAuthenticated, logout, user } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [changeColor, setChangeColor] = useState(false);
 
+  const handleChangeColor = () => {
+    if (window.scrollY >= 90) {
+      setChangeColor(true);
+    } else {
+      setChangeColor(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleChangeColor);
+
+    return () => {
+      window.removeEventListener("scroll", handleChangeColor);
+    };
+  }, []);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -99,12 +115,19 @@ export default function NavBar() {
 
   return (
     <>
-      <AppBar position="fixed" className="nav_bar" color="secondary">
+      <AppBar
+        position="fixed"
+        className="nav_bar"
+        color="secondary"
+        sx={{
+          backgroundColor: changeColor ? "rgba(32, 62, 160, 0.83)" : undefined,
+        }}
+      >
         <Toolbar className="custom-toolbar">
           <Box component={Link} to="/" className="logo_container">
             <Box
               component="img"
-              src={CCPLogo2}
+              src={CCPnewLogo}
               className="img_logo"
               alt="Company Logo"
               LinkComponent={Link}
@@ -143,7 +166,7 @@ export default function NavBar() {
                     <StyledButton
                       LinkComponent={Link}
                       to={`/users/${user.id}/dashboard`}
-                      sx={{padding: '0.4em 2em '}}
+                      sx={{ padding: "0.4em 2em " }}
                       fullWidth
                     >
                       Dashboard

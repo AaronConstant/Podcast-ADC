@@ -1,27 +1,132 @@
-import { Typography, Box, Paper } from "@mui/material";
+import { Typography, Box, Paper, Button, TextField } from "@mui/material";
 import {
   StyledBox,
   StyledButton,
   StyledTypography,
   StyledContainer,
-  StyledPaper,
   StyledSubTypography,
 } from "../Styling/theme";
 import "../Styling/LandingPage.scss";
+import ctavideo from "../assets/ctavideo.mp4";
 import { Link } from "react-router-dom";
-import CCPImagine from '../assets/CCPIconThink.png'
-import CCPWrite from '../assets/CCPIconWrite.png';
-import CCPListen from '../assets/CCPIconListen.png';
-import CCPRepeat from '../assets/CCPIconRepeat.png';
-import CPRLogo from '../assets/CPR.png';
+import CCPImagine from "../assets/CCPIconThink.png";
+import CCPWrite from "../assets/CCPIconWrite.png";
+import CCPListen from "../assets/CCPIconListen.png";
+import CCPRepeat from "../assets/CCPIconRepeat.png";
+import CPRLogo from "../assets/CPR.png";
 import { useAuth } from "../contexts/AuthContext";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function LandingPage() {
-  const {user, isAuthenticated } = useAuth()
+  const { user, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (loginInfo) => {
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const result = await login(loginInfo);
+      if (result.success) {
+        navigate(`/users/${result.user.id}/dashboard`);
+      } else {
+        setError(result.error || "Failed to Sign in. Try Again Please :(");
+      }
+      reset();
+    } catch (error) {
+      console.error("Error signing in: ", error);
+      setError(
+        error.response?.data?.message || "Failed to sign in. Please try again."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <Box className="landing-page-container">
+
+      {/* Call to Action Video Container finish SCSS for proper positioning for both login form and video */}
+      <Box className="CTA_container">
+        <Box className="CTA_video_and_button">
+          <Box>
+            <video
+              src={ctavideo}
+              type="video/mp4"
+              className="cta_video"
+              autoPlay
+              muted
+              playsInline
+            >
+              Your browser does not support the video tag.
+            </video>
+          </Box>
+          <Button className="cta_button">Click Here</Button>
+        </Box>
+        <Box className="cta_login">
+          <form onSubmit={handleSubmit(onSubmit)} className="signin-form">
+            <div className="form-field">
+              <TextField
+                label="Username or Email"
+                variant="outlined"
+                fullWidth
+                className="signin-input"
+                {...register("username", {
+                  required: "Username or email is required",
+                  minLength: {
+                    value: 3,
+                    message: "Username must be at least 3 characters",
+                  },
+                })}
+                error={!!errors.username}
+                helperText={errors.username?.message}
+              />
+            </div>
+
+            <div className="form-field">
+              <TextField
+                label="Password"
+                type="password"
+                variant="outlined"
+                fullWidth
+                className="signin-input"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                })}
+                error={!!errors.password}
+                helperText={errors.password?.message}
+              />
+            </div>
+
+            <StyledButton
+              type="submit"
+              className="signin-button"
+              disabled={isLoading}
+              fullWidth
+            >
+              {isLoading ? "Signing In..." : "Sign In"}
+            </StyledButton>
+          </form>
+        </Box>
+      </Box>
+
       {/* Hero Section */}
       <Box className="hero-section">
+        <Box className="cta-box"></Box>
         <Box
           className="hero-logo"
           component="img"
@@ -36,15 +141,15 @@ export default function LandingPage() {
           </StyledTypography>
           <Typography className="intro-text">
             🎙️ Ready to Hear What You Love? Whether you want to unwind with a
-            podcast tailored just for you or you are dreaming up a series of your
-            own, you’re in the perfect place. Our AI-powered podcast generator
-            creates unique, fully-voiced episodes on any topic you choose—just
-            for your enjoyment. Want a relaxing story? A deep dive into a
-            niche interest? A custom series with your own voice and vision? Just
-            prompt, press play, and enjoy. No studio. No script. No limits. Just
-            AI-crafted audio that sounds like it was made with you in mind. 🎧
-            Explore. Create. Listen. Because your next favorite podcast might be
-            one you’ve imagined yourself.
+            podcast tailored just for you or you are dreaming up a series of
+            your own, you’re in the perfect place. Our AI-powered podcast
+            generator creates unique, fully-voiced episodes on any topic you
+            choose—just for your enjoyment. Want a relaxing story? A deep dive
+            into a niche interest? A custom series with your own voice and
+            vision? Just prompt, press play, and enjoy. No studio. No script. No
+            limits. Just AI-crafted audio that sounds like it was made with you
+            in mind. 🎧 Explore. Create. Listen. Because your next favorite
+            podcast might be one you’ve imagined yourself.
           </Typography>
           <Typography className="intro-text">
             Dive into <strong>true crime</strong>, explore tech trends, tell
@@ -57,7 +162,7 @@ export default function LandingPage() {
               size="large"
               className="cta-button"
               LinkComponent={Link}
-              to={isAuthenticated ? `/users/${user.id}/dashboard`: '/signup'}
+              to={isAuthenticated ? `/users/${user.id}/dashboard` : "/signup"}
             >
               Start Creating Now 🎧
             </StyledButton>
@@ -85,30 +190,30 @@ export default function LandingPage() {
             <Typography variant="h3" className="step-title">
               Imagine
             </Typography>
-            <StyledPaper className="step-description" elevation={1}>
+            <Paper className="step-description" elevation={1}>
               <StyledSubTypography>
                 Brainstorm your podcast concept. Any topic, any style, any
                 format.
               </StyledSubTypography>
-            </StyledPaper>
+            </Paper>
           </Box>
 
           <Box className="grid-item" tabIndex="0" role="button">
             <Box
               component="img"
               className="process-icon"
-            src={CCPWrite}
+              src={CCPWrite}
               alt="Create - AI generates your podcast content"
               loading="lazy"
             />
             <Typography variant="h3" className="step-title">
               Generate
             </Typography>
-            <StyledPaper className="step-description" elevation={1}>
+            <Paper className="step-description" elevation={1}>
               <StyledSubTypography>
                 Our AI crafts engaging content tailored to your vision.
               </StyledSubTypography>
-            </StyledPaper>
+            </Paper>
           </Box>
 
           <Box className="grid-item" tabIndex="0" role="button">
@@ -122,11 +227,11 @@ export default function LandingPage() {
             <Typography variant="h3" className="step-title">
               Listen
             </Typography>
-            <StyledPaper className="step-description" elevation={1}>
+            <Paper className="step-description" elevation={1}>
               <StyledSubTypography>
                 Experience your podcast brought to life with realistic voices.
               </StyledSubTypography>
-            </StyledPaper>
+            </Paper>
           </Box>
 
           <Box className="grid-item" tabIndex="0" role="button">
@@ -140,11 +245,11 @@ export default function LandingPage() {
             <Typography variant="h3" className="step-title">
               Explore
             </Typography>
-            <StyledPaper className="step-description" elevation={2}>
+            <Paper className="step-description" elevation={2}>
               <StyledSubTypography>
                 Keep creating! No limits on your imagination.
               </StyledSubTypography>
-            </StyledPaper>
+            </Paper>
           </Box>
         </Paper>
       </Box>
@@ -167,7 +272,7 @@ export default function LandingPage() {
             Create Your First Podcast
           </StyledButton>
         </StyledBox>
-
+        <Paper></Paper>
         <StyledBox className="cta-secondary">
           <Typography variant="body2" className="secondary-text">
             No experience needed • Unlimited creativity • Share with friends

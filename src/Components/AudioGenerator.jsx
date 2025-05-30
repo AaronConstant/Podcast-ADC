@@ -25,11 +25,6 @@ const AudioConverter = ({ script }) => {
 
   const scriptStorage = JSON.parse(localStorage.getItem("script"));
 useEffect(() => {
-    // if (script) {
-    //   setText(script);
-    //   return;
-    // }
-
     try {
       if (scriptStorage) {
         const scriptString = `

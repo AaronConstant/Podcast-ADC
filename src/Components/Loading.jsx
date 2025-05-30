@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { CircularProgress, Box } from "@mui/material";
-import { StyledPaper } from "../Styling/theme";
 import "../Styling/Loading.scss";
 const Loading = () => {
   const [visible, setVisible] = useState(true);
