@@ -82,7 +82,13 @@ export default function LandingPage() {
             </video>
           </Box>
           {showButton && (
-            <StyledButton className={`hero_cta_button ${showButton ? "fade-in" : ""}`}>Start Your Journey!</StyledButton>
+            <StyledButton
+              className={`hero_cta_button ${showButton ? "fade-in" : ""}`}
+              LinkComponent={Link}
+              to="/signup"
+            >
+              Start Your Journey!
+            </StyledButton>
           )}
         </Box>
         <Box className="cta_login_container">

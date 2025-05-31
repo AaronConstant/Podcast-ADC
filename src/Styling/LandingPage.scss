@@ -122,7 +122,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 1000vw;
   max-width: 1200px;
   margin-bottom: 3rem;
 }
@@ -132,7 +132,7 @@
   max-width: 50rem;
   height: auto;
   border-radius: 50%;
-  padding: 2rem;
+  padding: 6rem;
   margin-bottom: 2rem;
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0);
   transition: transform 0.3s ease, box-shadow 0.3s ease;

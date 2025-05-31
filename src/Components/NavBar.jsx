@@ -118,9 +118,10 @@ export default function NavBar() {
       <AppBar
         position="fixed"
         className="nav_bar"
-        color="secondary"
         sx={{
-          backgroundColor: changeColor ? "rgba(32, 62, 160, 0.83)" : undefined,
+          background: changeColor
+            ? "rgba(32, 62, 160, 0.75) !important"
+            : undefined,
         }}
       >
         <Toolbar className="custom-toolbar">
