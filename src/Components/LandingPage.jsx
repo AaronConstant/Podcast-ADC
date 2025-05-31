@@ -15,10 +15,13 @@ import CCPWrite from "../assets/CCPIconWrite.png";
 import CCPListen from "../assets/CCPIconListen.png";
 import CCPRepeat from "../assets/CCPIconRepeat.png";
 import CPRLogo from "../assets/CPR.png";
+import CCPFooterLogo from "../assets/CCPFooterPhoto.png";
+
 import { useAuth } from "../contexts/AuthContext";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+
 
 export default function LandingPage() {
   const { user, isAuthenticated } = useAuth();
@@ -95,6 +98,13 @@ export default function LandingPage() {
           <Paper className="cta_login">
             <form onSubmit={handleSubmit(onSubmit)} className="signin-form">
               <div className="form-field cta_login_input">
+             <Box
+                      className="logo_pic"
+                      component="img"
+                      src={CCPFooterLogo}
+                      alt="Chit Chat Logo"
+                      loading="eager"
+                    />
                 <TextField
                   label="Username or Email"
                   variant="outlined"

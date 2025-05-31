@@ -23,7 +23,6 @@ export default function Apps() {
     <Route path='/contact' element={<Contact />}/>
       {/* <Home /> */}
     </Routes>
-
 <Footer/>   
  </>
   )

@@ -1,21 +1,19 @@
+
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
 #root {
-  margin: 0 auto;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
   text-align: center;
-  height: 100vh;
-  width: 100vw;
-font-family: "Montserrat", sans-serif !important;
+  height: 100%;
+  width: 100%; 
+  font-family: "Montserrat", sans-serif !important;
   font-optical-sizing: auto;
   background: #f5f4ed;
-
-}
- body {
-  display:grid;
-  justify-content: center;
-  align-items: center;
-  
-}
-
-html {
-  height: auto !important;
 }
