@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Akronim&display=swap");
 .landing-page-container {
   display: flex;
   flex-direction: column;
@@ -23,34 +24,97 @@
   flex: 1;
   height: 100%;
   width: 100%;
-  display: flex; // This will split video and form 50/50
+  display: flex;
   justify-content: left;
   align-items: center;
-  
+
   .CTA_video_and_button {
-    flex: 1; // Takes 50% of container
-    position: relative; // Needed for absolute positioning of button
+    position: relative;
     display: flex;
-    
+
     .cta_video {
-      width: 70vw; 
-      height: auto;
+      width: 70vw;
+      height: 72vh;
       object-fit: cover;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, transparent 0%, white 100%);
+        pointer-events: none;
+        z-index: 2;
+      }
     }
-    
-    .cta_button {
+
+    .hero_cta_button {
       position: absolute;
-      top: 20px;
-      left: 20px; 
+      font-family: "Akronim", sans-serif;
+      border-radius: 20px;
+      font-size: 1.5rem;
+      top: 22%;
+      left: 76%;
       z-index: 1;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+    }
+
+    .hero_cta_button.fade-in {
+      animation: fadeIn 1s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .hero_cta_button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 30px rgba(37, 153, 211, 0.758);
     }
   }
 
-  .cta_form { // Make sure this class matches your HTML
-    flex: 1; // Takes the other 50% of container
-    width: auto; 
-    padding: 20px;
+  .cta_login_container {
+    flex: 1;
+    width: auto;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid rgb(0, 0, 0);
+
+    .cta_login {
+      display: grid;
+      border-radius: 0 !important;
+      width: 29vw;
+      height: 70vh;
+      margin: 0;
+      padding: 10px;
+      justify-content: center;
+      place-items: center;
+
+      .cta_login_input {
+        width: 25em;
+      }
+    }
   }
+}
+.section-divider-two {
+  border: none;
+  margin: 0;
+  width: 100%;
+  height: 57px;
+  position: absolute;
+  top: 79%;
+  background: linear-gradient(
+    180deg,
+    rgb(62, 211, 222) 20%,
+    rgb(208, 242, 238) 80%
+  );
 }
 
 // ! *** Hero Section *** //
@@ -68,7 +132,7 @@
   max-width: 50rem;
   height: auto;
   border-radius: 50%;
-  padding: 1rem;
+  padding: 2rem;
   margin-bottom: 2rem;
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -129,6 +193,8 @@
 
   .cta-button {
     padding: 1rem 2rem !important;
+    font-family: "Akronim", sans-serif !important;
+    letter-spacing: 0.2em !important;
     font-size: 1.1rem;
     font-weight: bold;
     font-family: "Times New Roman", Times, serif;
@@ -255,7 +321,7 @@
 .cta-section {
   display: flex;
   width: 100% !important;
-  max-width: 1200px !important;
+  max-width: 1050px !important;
   margin: 4rem auto 2rem !important;
   background: linear-gradient(
     135deg,
@@ -293,13 +359,15 @@
 
 .primary-cta {
   background-color: white !important;
+  font-family: "Akronim", sans-serif !important;
   color: rgb(32, 61, 160) !important;
   padding: 1rem 2rem !important;
   font-weight: bold !important;
   font-size: 1.1rem !important;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.9) !important;
+    background-color: rgba(91, 200, 243, 0.9) !important;
+    color: rgb(255, 255, 255) !important;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   }

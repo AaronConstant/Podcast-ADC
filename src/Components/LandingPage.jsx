@@ -5,6 +5,7 @@ import {
   StyledTypography,
   StyledContainer,
   StyledSubTypography,
+  StyledPaper,
 } from "../Styling/theme";
 import "../Styling/LandingPage.scss";
 import ctavideo from "../assets/ctavideo.mp4";
@@ -17,7 +18,7 @@ import CPRLogo from "../assets/CPR.png";
 import { useAuth } from "../contexts/AuthContext";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function LandingPage() {
   const { user, isAuthenticated } = useAuth();
@@ -25,6 +26,8 @@ export default function LandingPage() {
   const { login } = useAuth();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showButton, setShowButton] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -53,9 +56,16 @@ export default function LandingPage() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowButton(true);
+    }, 6900);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <Box className="landing-page-container">
-
       {/* Call to Action Video Container finish SCSS for proper positioning for both login form and video */}
       <Box className="CTA_container">
         <Box className="CTA_video_and_button">
@@ -71,58 +81,63 @@ export default function LandingPage() {
               Your browser does not support the video tag.
             </video>
           </Box>
-          <Button className="cta_button">Click Here</Button>
+          {showButton && (
+            <StyledButton className={`hero_cta_button ${showButton ? "fade-in" : ""}`}>Start Your Journey!</StyledButton>
+          )}
         </Box>
-        <Box className="cta_login">
-          <form onSubmit={handleSubmit(onSubmit)} className="signin-form">
-            <div className="form-field">
-              <TextField
-                label="Username or Email"
-                variant="outlined"
-                fullWidth
-                className="signin-input"
-                {...register("username", {
-                  required: "Username or email is required",
-                  minLength: {
-                    value: 3,
-                    message: "Username must be at least 3 characters",
-                  },
-                })}
-                error={!!errors.username}
-                helperText={errors.username?.message}
-              />
-            </div>
+        <Box className="cta_login_container">
+          <Paper className="cta_login">
+            <form onSubmit={handleSubmit(onSubmit)} className="signin-form">
+              <div className="form-field cta_login_input">
+                <TextField
+                  label="Username or Email"
+                  variant="outlined"
+                  fullWidth
+                  className="signin-input"
+                  {...register("username", {
+                    required: "Username or email is required",
+                    minLength: {
+                      value: 3,
+                      message: "Username must be at least 3 characters",
+                    },
+                  })}
+                  error={!!errors.username}
+                  helperText={errors.username?.message}
+                />
+              </div>
 
-            <div className="form-field">
-              <TextField
-                label="Password"
-                type="password"
-                variant="outlined"
-                fullWidth
-                className="signin-input"
-                {...register("password", {
-                  required: "Password is required",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters",
-                  },
-                })}
-                error={!!errors.password}
-                helperText={errors.password?.message}
-              />
-            </div>
+              <div className="form-field">
+                <TextField
+                  label="Password"
+                  type="password"
+                  variant="outlined"
+                  fullWidth
+                  className="signin-input cta_login_input"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
+                  error={!!errors.password}
+                  helperText={errors.password?.message}
+                />
+              </div>
 
-            <StyledButton
-              type="submit"
-              className="signin-button"
-              disabled={isLoading}
-              fullWidth
-            >
-              {isLoading ? "Signing In..." : "Sign In"}
-            </StyledButton>
-          </form>
+              <StyledButton
+                type="submit"
+                className="signin-button"
+                disabled={isLoading}
+                fullWidth
+              >
+                {isLoading ? "Signing In..." : "Sign In"}
+              </StyledButton>
+            </form>
+          </Paper>
         </Box>
       </Box>
+      <hr className="section-divider-two" />
 
       {/* Hero Section */}
       <Box className="hero-section">
