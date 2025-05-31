@@ -51,7 +51,7 @@ export default function Footer() {
               <LinkedIn className="social_icon" />
             </a>
             <a
-              href="https://yourportfolio.com"
+              href="https://aaronconstantportfolio.netlify.app/"
               className="social_link portfolio"
               target="_blank"
               rel="noopener noreferrer"
