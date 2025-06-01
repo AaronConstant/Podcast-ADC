@@ -1,4 +1,4 @@
-import { Typography, Box, Paper, Button, TextField } from "@mui/material";
+import { Typography, Box, Paper, Button, TextField, Container } from "@mui/material";
 import {
   StyledBox,
   StyledButton,
@@ -69,7 +69,6 @@ export default function LandingPage() {
   }, []);
   return (
     <Box className="landing-page-container">
-      {/* Call to Action Video Container finish SCSS for proper positioning for both login form and video */}
       <Box className="CTA_container">
         <Box className="CTA_video_and_button">
           <Box>
@@ -157,6 +156,7 @@ export default function LandingPage() {
 
       {/* Hero Section */}
       <Box className="hero-section">
+        {/* Readjust the hero logo and intro-container as flex and change background to match navbar with a gradient descending */}
         <Box className="cta-box"></Box>
         <Box
           className="hero-logo"
@@ -166,7 +166,7 @@ export default function LandingPage() {
           loading="eager"
         />
 
-        <StyledBox className="intro-container" elevation={3}>
+        <Container className="intro-container" elevation={3}>
           <StyledTypography component="h1" className="intro-heading">
             AI Podcast Studio – Your Personalized Podcast Creator
           </StyledTypography>
@@ -198,7 +198,7 @@ export default function LandingPage() {
               Start Creating Now 🎧
             </StyledButton>
           </Box>
-        </StyledBox>
+        </Container>
       </Box>
 
       <hr className="section-divider" />

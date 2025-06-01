@@ -7,15 +7,23 @@ import {
   StyledContainer,
   StyledSubTypography,
 } from "../../Styling/theme";
-import { Paper } from "@mui/material";
+import {
+  Paper,
+  Container,
+  Accordion,
+  AccordionDetails,
+  AccordionActions,
+  AccordionSummary,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Typography from "@mui/material/Typography";
 import { useAuth } from "../../contexts/AuthContext";
 import "../../Styling/EntriesStyling.scss";
 export default function UserPodcastEntries() {
   const { user } = useAuth();
   const API = import.meta.env.VITE_BASE_URL;
   const [userPodcast, setUserPodcastEntries] = useState([]);
-    const [error, setError] = useState(null);
-
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchPodcasts = async () => {
@@ -27,8 +35,10 @@ export default function UserPodcastEntries() {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        
-        response.data.length === 0? setUserPodcastEntries([]): setUserPodcastEntries(response.data);
+
+        response.data.length === 0
+          ? setUserPodcastEntries([])
+          : setUserPodcastEntries(response.data);
       } catch (error) {
         console.log("Error retrieving podcasts: ", error);
       }
@@ -39,13 +49,10 @@ export default function UserPodcastEntries() {
     //   if (user?.id) {
     //     fetchPodcasts();
     //   }
-    // }, 15000); 
+    // }, 15000);
 
     // return () => clearInterval(interval);
-    
   }, [user.id]);
-
-
 
   const deletePodcast = async (podcastId) => {
     const token = localStorage.getItem("token");
@@ -56,8 +63,10 @@ export default function UserPodcastEntries() {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-        console.log(response.data.message)
-      setUserPodcastEntries(prev => prev.filter(podcast => podcast.id !== podcastId));
+      console.log(response.data.message);
+      setUserPodcastEntries((prev) =>
+        prev.filter((podcast) => podcast.id !== podcastId)
+      );
     } catch (error) {
       console.log("Error Deleting: ", error);
       setError("Failed to delete podcast");
@@ -81,33 +90,42 @@ export default function UserPodcastEntries() {
   }
   return (
     <div className="entry_container">
-      <StyledContainer>
-        
-        {userPodcast.map((podcast) => (
-          <Paper key={podcast.id} style={{ margin: '10px 0', padding: '15px' }}>
-            <StyledTypography variant="h6">{podcast.title}</StyledTypography>
-            {podcast.description && (
-              <StyledSubTypography>{podcast.description}</StyledSubTypography>
-            )}
+      <Container className="accordian_container">
+         <div>
+          <Typography className="accordian-title">Podcast Library</Typography>
+      {userPodcast.map((podcast, index) => (
+        <Accordion className="accordian-item" key={index}>
+          <AccordionSummary className="accordian-summary"
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls={`panel-content-${index}`}
+            id={`panel-header-${index}`}
+          >
+            <Typography>{podcast.title}</Typography>
+          </AccordionSummary>
+          <AccordionDetails className="accordian-details">
+            <Typography>{podcast.description}</Typography>
             {podcast.audio_url && (
-              <audio controls style={{ width: '100%', marginTop: '10px' }}>
-                {console.log("Line 95 UPE Url: ",podcast.url)}
+              <audio controls style={{ width: "100%", marginTop: "10px" }}>
+                {console.log("Line 95 UPE Url: ", podcast.url)}
                 <source src={podcast.audio_url} type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>
             )}
-            <div style={{ marginTop: '10px' }}>
-              <StyledButton 
+            <div style={{ marginTop: "10px" }}>
+              <StyledButton
                 onClick={() => deletePodcast(podcast.id)}
-                color="error"
+                color="primary"
                 size="small"
               >
                 Delete
               </StyledButton>
             </div>
-          </Paper>
-        ))}
-      </StyledContainer>
+          </AccordionDetails>
+        </Accordion>
+      ))}
+    </div>
+       
+      </Container>
     </div>
   );
 }

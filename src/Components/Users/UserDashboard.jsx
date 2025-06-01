@@ -22,12 +22,8 @@ export default function UserDashboard() {
 
   return (
     <div className="dashboard_container">
-      <StyledContainer className="genarator_and_pdocasts_container">
-        <StyledBox>
           <PodcastPlatform />
-        </StyledBox>
         {<UserPodcastEntries />}
-      </StyledContainer>
     </div>
   );
 }

@@ -77,7 +77,7 @@ export default function SignUp() {
 
       setTimeout(() => {
         navigate(`/users/${user.id}/dashboard`);
-      }, [5000]);
+      }, [3000]);
     } catch (error) {
       console.error("Error creating user:", error);
       setError(
@@ -95,13 +95,12 @@ export default function SignUp() {
   //   }
   // };
 
-  // console.log("Auth User: ", user);
 
   return (
     <div className="signup-page">
       <Paper className="paper-container">
         <div className="form-header">
-          <StyledTypography>Join the Chit-Chat Community</StyledTypography>
+          <StyledTypography className="form-title">Join the Chit-Chat Community</StyledTypography>
           <div className="signup-subtitle">
             Fill in your details to get started
           </div>

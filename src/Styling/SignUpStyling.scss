@@ -4,7 +4,7 @@
   height: 100vh;
   width: 100vw;
   padding-bottom: 100px;
-  background-image: url('../assets/CCPSignUPPhoto.png');
+  background-image: url("../assets/CCPSignUPPhoto.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -20,14 +20,21 @@
 }
 
 .form-header {
-    padding-top: 2em;
-    margin: 0 !important;
+  padding-top: 2em;
+
+  margin: 0 !important;
+
+  .form-title {
+    font-family: "Akronim", sans-serif;
+    font-size: 2.5em;
+    letter-spacing: 4px;
+  }
 }
 
 .paper-container {
   border-radius: 20px !important;
   margin: 6em;
-    height: 80% !important;
+  height: 80% !important;
 
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1) !important;
   animation: slideInRight 1.5s ease-out;
@@ -53,18 +60,7 @@
     padding: 1em;
     background-color: rgba(248, 249, 250, 0.8);
 
-    &:hover .MuiOutlinedInput-notchedOutline {
-      border-color: #3e9ccc;
-      border-width: 2px;
-    }
-
-    &.Mui-focused .MuiOutlinedInput-notchedOutline {
-      border-color: #3ed3de;
-      border-width: 2px;
-    }
-
     .MuiOutlinedInput-input {
-     
       font-size: 1rem;
     }
   }
@@ -72,10 +68,8 @@
 
 .form {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); 
-  //   gap: 1.5rem;
-  //   width: 60vw;
-  
+  grid-template-columns: repeat(2, 1fr);
+
   max-width: 900px;
   margin: 0 auto;
   padding: 0;

@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Akronim&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
 .landing-page-container {
   display: flex;
   flex-direction: column;
@@ -54,6 +56,10 @@
       position: absolute;
       font-family: "Akronim", sans-serif;
       border-radius: 20px;
+      border: #162a6f 2px dotted;
+            color: rgb(32, 61, 160);
+
+      background: none;
       font-size: 1.5rem;
       top: 22%;
       left: 76%;
@@ -77,6 +83,7 @@
 
     .hero_cta_button:hover {
       transform: translateY(-1px);
+      color: rgb(32, 61, 160);
       box-shadow: 0 8px 30px rgba(37, 153, 211, 0.758);
     }
   }
@@ -88,7 +95,7 @@
     border-left: 5px solid rgb(0, 0, 0);
     .logo_pic {
       width: 100%;
-      height: 30vh;
+      height: 31vh;
       object-fit: cover;
       border-radius: 0 !important;
       margin-bottom: 1rem;
@@ -96,10 +103,10 @@
     .cta_login {
       display: grid;
       border-radius: 0 !important;
-      width: 29vw;
-      height: 70vh;
+      width: 30vw;
+      height: 72vh;
       margin: 0;
-      padding: 10px;
+      // padding: 10px;
       justify-content: center;
       place-items: center;
 
@@ -161,7 +168,7 @@
   padding: 3rem !important;
   text-align: center;
   border-radius: 100px !important;
-  background: #ffffff !important;
+  background: #ffffff69 !important;
 
   @media (max-width: 768px) {
     padding: 2rem 1rem !important;
@@ -169,6 +176,8 @@
 }
 
 .intro-heading {
+   font-family: 'Abril Fatface', sans-serif !important;
+
   margin-bottom: 1.5rem !important;
   color: rgb(32, 61, 160) !important;
 
@@ -222,7 +231,7 @@
 }
 
 .section-title {
-  font-family: "DM Serif Display", serif !important;
+ font-family: 'Abril Fatface', sans-serif !important;
   font-size: 4em !important;
   text-align: center;
   margin-bottom: 3rem !important;
@@ -236,7 +245,7 @@
   gap: 2rem;
   width: 100%;
   padding: 2rem !important;
-  background: #ffffff !important;
+  background: #ffffff96 !important;
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);

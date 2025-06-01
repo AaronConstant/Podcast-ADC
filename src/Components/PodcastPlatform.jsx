@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import {
   Typography,
   TextField,
@@ -9,6 +10,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Box
 } from "@mui/material";
 import {
   StyledBox,
@@ -31,7 +33,15 @@ function PodcastPlatform() {
   const [showAudioConverter, setShowAudioConverter] = useState(false);
   const { user } = useAuth();
 
-  const handleSubmit = async () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async () => {
     setIsLoading(true);
     try {
       const token = localStorage.getItem("token");
@@ -75,24 +85,33 @@ function PodcastPlatform() {
 
   return (
     <div className="generator_container" style={{ padding: "20px" }}>
-      <StyledTypography>Your Personalized</StyledTypography>
       <Typography variant="h4">Chit Chat Podcasts</Typography>
-      <Typography variant="h4">Generator</Typography>
+      <StyledTypography>Personalized</StyledTypography>
+      <Typography variant="h4">Creator</Typography>
+      <form action="">
+        <StyledBox>
       <TextField
         fullWidth
+        className="prompt_input"
         label="Enter your prompt..."
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         style={{ margin: "20px 0" }}
       />
+        </StyledBox>
       <StyledButton
         variant="contained"
         color="secondary"
         onClick={handleSubmit}
         disabled={isLoading}
       >
-        Create Prompt
+        Create Podcast Script
       </StyledButton>
+
+
+
+
+      </form>
 
       {isLoading && (
         <div style={{ marginTop: "20px" }}>

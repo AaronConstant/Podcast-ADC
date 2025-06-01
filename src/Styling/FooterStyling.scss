@@ -15,7 +15,6 @@
     margin-right: 5em;
     padding: 0 20px;
     flex-wrap: wrap;
-    // gap: 10px;
 
     @media (max-width: 768px) {
       flex-direction: column;
@@ -105,7 +104,6 @@
     max-width: 20% !important;
     max-width: 20% !important;
     margin-right: 10em;
-    // border-radius: 12px;
     transition: transform 0.3s ease;
 
     &:hover {
@@ -165,7 +163,7 @@
 
         &.github:hover {
           background: #333;
-          color: #white;
+          color: white;
         }
 
         &.linkedin:hover {

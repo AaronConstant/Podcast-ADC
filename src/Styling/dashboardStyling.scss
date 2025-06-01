@@ -1,12 +1,15 @@
 .dashboard_container {
-    display: grid;
+    display: flex;
     justify-content: center;
     align-items: center;
-    height:100vh;
+    height: 80vh;
     background: linear-gradient(0deg,rgba(34, 193, 195, 1) 10%, rgb(246, 243, 226) 60%);
-
-    .genarator_and_pdocasts_container {
+    .genarator_and_podcasts_container {
+        width: 100vw;
         display: flex;
         height: auto;
+        gap: 12em;
+        background: none;
+        border: none !important;
     }
 }
