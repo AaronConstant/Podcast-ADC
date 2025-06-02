@@ -1,15 +1,16 @@
+.full-container{
+    background-image: url('../assets/Dashboardbackground.jpg');
+     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 .dashboard_container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
-    background: linear-gradient(0deg,rgba(34, 193, 195, 1) 10%, rgb(246, 243, 226) 60%);
-    .genarator_and_podcasts_container {
-        width: 100vw;
-        display: flex;
-        height: auto;
-        gap: 12em;
-        background: none;
-        border: none !important;
-    }
+    height: 90vh;
+    
 }
+.podcast_header {
+    margin-top: 20px;
+  }
