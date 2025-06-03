@@ -19,40 +19,13 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from "@mui/material/Typography";
 import { useAuth } from "../../contexts/AuthContext";
 import "../../Styling/EntriesStyling.scss";
-export default function UserPodcastEntries() {
+import PropTypes from 'prop-types';
+
+
+export default function UserPodcastEntries({podcastEntries, setPodcastEntries}) {
   const { user } = useAuth();
   const API = import.meta.env.VITE_BASE_URL;
-  const [userPodcast, setUserPodcastEntries] = useState([]);
   const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchPodcasts = async () => {
-      const token = localStorage.getItem("token");
-      try {
-        const response = await axios.get(
-          `${API}/users/${user.id}/podcastentries`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
-        response.data.length === 0
-          ? setUserPodcastEntries([])
-          : setUserPodcastEntries(response.data);
-      } catch (error) {
-        console.log("Error retrieving podcasts: ", error);
-      }
-    };
-    fetchPodcasts();
-
-    //  const interval = setInterval(() => {
-    //   if (user?.id) {
-    //     fetchPodcasts();
-    //   }
-    // }, 15000);
-
-    // return () => clearInterval(interval);
-  }, [user.id]);
 
   const deletePodcast = async (podcastId) => {
     const token = localStorage.getItem("token");
@@ -64,7 +37,7 @@ export default function UserPodcastEntries() {
         }
       );
       console.log(response.data.message);
-      setUserPodcastEntries((prev) =>
+      setPodcastEntries((prev) =>
         prev.filter((podcast) => podcast.id !== podcastId)
       );
     } catch (error) {
@@ -73,11 +46,11 @@ export default function UserPodcastEntries() {
     }
   };
 
-  if (!userPodcast) {
+  if (!podcastEntries) {
     return <p>Loading podcasts...</p>;
   }
 
-  if (userPodcast.length === 0) {
+  if (podcastEntries.length === 0) {
     return (
       <StyledContainer className="entry_container">
         <h1>{user.firstName}'s Podcasts</h1>
@@ -88,12 +61,17 @@ export default function UserPodcastEntries() {
       </StyledContainer>
     );
   }
+  UserPodcastEntries.propTypes = {
+  user: PropTypes.object.isRequired,
+  userPodcast: PropTypes.array,
+  podcastEntries: PropTypes.array.isRequired,
+};
   return (
     <div className="entry_container">
       <Container className="accordian_container">
          <div>
           <Typography className="accordian-title">Podcast Library</Typography>
-      {userPodcast.map((podcast, index) => (
+      {podcastEntries.map((podcast, index) => (
         <Accordion className="accordian-item" key={index}>
           <AccordionSummary className="accordian-summary"
             expandIcon={<ExpandMoreIcon />}

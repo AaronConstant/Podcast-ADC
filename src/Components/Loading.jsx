@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { CircularProgress, Box } from "@mui/material";
+import { CircularProgress, Box, CircularProgressWithLabel } from "@mui/material";
 import "../Styling/Loading.scss";
 const Loading = () => {
   const [visible, setVisible] = useState(true);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setVisible(false);
@@ -14,7 +13,7 @@ const Loading = () => {
 
   return (
     <Box className={`loading_box ${visible ? "visible" : ""}`}>
-      <CircularProgress />
+      <CircularProgress/>
     </Box>
   );
 };

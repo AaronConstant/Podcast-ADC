@@ -22,9 +22,9 @@ import AudioConverter from "./AudioGenerator";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 import "../Styling/PodcastPlatformStyling.scss";
-function PodcastPlatform() {
+
+function PodcastPlatform({onNewPodcast}) {
   const API = import.meta.env.VITE_BASE_URL;
-  const [prompt, setPrompt] = useState("");
   const [script, setScript] = useState(null);
   const [isScript, setIsScript] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,6 +37,8 @@ function PodcastPlatform() {
     "Professional",
     "Humorous",
   ];
+  console.log("Line-41 Current passedPrompt", typeof onNewPodcast);
+  
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   
@@ -50,13 +52,14 @@ function PodcastPlatform() {
   } = useForm();
   const moodValue = watch("mood") || "";
 
-  const onSubmit = async () => {
+  const onSubmit = async (data) => {
     setIsLoading(true);
+    console.log("Form submitted with data:", data);
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
         `${API}/users/${user.id}/podcastentries/script`,
-        { podcastentry: prompt },
+        { podcastentry: data.prompt, mood: data.mood },
         {
           headers: {
             "Content-Type": "application/json",
@@ -64,8 +67,9 @@ function PodcastPlatform() {
           },
         }
       );
-      localStorage.setItem("script", JSON.stringify(response.data));
       setScript(response.data);
+      console.log(response.data)
+      localStorage.setItem("script", JSON.stringify(response.data));
       handleShowScript();
     } catch (error) {
       console.error("An error occurred:", error);
@@ -127,17 +131,11 @@ function PodcastPlatform() {
           <TextField
             {...register("prompt", { required: "Prompt is required" })}
             fullWidth
-            multiline
             rows={3}
-            placeholder="Describe what you'd like your podcast to be about..."
+            placeholder="What we want to Chit Chat about..."
             variant="outlined"
             error={!!errors.prompt}
             helperText={errors.prompt?.message}
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                borderRadius: 2,
-              }
-            }}
           />
         </Box>
 
@@ -204,7 +202,7 @@ function PodcastPlatform() {
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <StyledButton
             variant="contained"
-            color="primary"
+            color="secondary"
             type="submit"
             disabled={isLoading}
             size="large"
@@ -284,7 +282,7 @@ function PodcastPlatform() {
   >
     <DialogTitle>Convert script to Audio</DialogTitle>
     <DialogContent>
-      <AudioConverter script={script} />
+      <AudioConverter script={script} onNewPodcast = {onNewPodcast} />
     </DialogContent>
     <DialogActions>
       <StyledButton onClick={handleCloseAudioConverter} color="primary">
