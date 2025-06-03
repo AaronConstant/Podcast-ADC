@@ -73,7 +73,7 @@ export default function NewLandingPage() {
           autoPlay
           muted
           playsInline
-          loop
+          
         >
           Your browser does not support the video tag.
         </video>
