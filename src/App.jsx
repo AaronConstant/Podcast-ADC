@@ -1,6 +1,6 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
-import LandingPage from './Components/LandingPage'
+// import LandingPage from './Components/LandingPage'
 import NavBar from './Components/NavBar'
 import SignIn from './Components/Forms/SignInForm'
 import SignUp from './Components/Forms/SignUpForm'
@@ -16,13 +16,13 @@ export default function Apps() {
     <>
     <NavBar/>
     <Routes>
-      <Route path='/' element ={<LandingPage/>}/>
+      {/* <Route path='/' element ={<LandingPage/>}/> */}
     <Route path='/login' element={<SignIn />}/>
     <Route path='/signup' element={<SignUp />}/>
     <Route path ='/users/:id/dashboard' element = {<UserDashboard/>}/>
     <Route path='/about' element={<AboutUs />}/>
     <Route path='/contact' element={<Contact />}/>
-      <Route path='/home' element={<NewLandingPage/>}/>
+      <Route path='/' element={<NewLandingPage/>}/>
     </Routes>
 <Footer/>   
  </>
