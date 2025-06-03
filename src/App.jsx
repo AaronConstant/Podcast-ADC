@@ -8,6 +8,7 @@ import UserDashboard from './Components/Users/UserDashboard'
 import AboutUs from  './Components/AboutUs'
 import Contact from './Components/Contact'
 import Footer from './Components/Footer'
+import NewLandingPage from './Components/NewLandingPage'
 
 export default function Apps() {
   
@@ -21,7 +22,7 @@ export default function Apps() {
     <Route path ='/users/:id/dashboard' element = {<UserDashboard/>}/>
     <Route path='/about' element={<AboutUs />}/>
     <Route path='/contact' element={<Contact />}/>
-      {/* <Home /> */}
+      <Route path='/home' element={<NewLandingPage/>}/>
     </Routes>
 <Footer/>   
  </>

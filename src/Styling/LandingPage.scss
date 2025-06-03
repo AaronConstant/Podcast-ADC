@@ -142,10 +142,10 @@
 
 .hero-logo {
   width: 100%;
-  max-width: 50rem;
+  max-width: 25rem;
   height: auto;
-  border-radius: 50%;
-  padding: 6rem;
+  border-radius: 40%;
+  padding: 5rem;
   margin-bottom: 2rem;
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -168,7 +168,7 @@
   padding: 3rem !important;
   text-align: center;
   border-radius: 100px !important;
-  background: #ffffff69 !important;
+  background: #ffffff00 !important;
 
   @media (max-width: 768px) {
     padding: 2rem 1rem !important;
@@ -179,7 +179,7 @@
    font-family: 'Abril Fatface', sans-serif !important;
 
   margin-bottom: 1.5rem !important;
-  color: rgb(32, 61, 160) !important;
+  color: rgb(255, 255, 255) !important;
 
   @media (max-width: 768px) {
     font-size: 1.5rem !important;
@@ -187,11 +187,11 @@
 }
 
 .intro-text {
-  color: #162a6f !important;
+  color: #ffffff !important;
   font-family: "DM Serif Display", serif !important;
   font-weight: 400 !important;
   font-style: normal !important;
-  font-size: 1.1rem !important;
+  font-size: 1rem !important;
   line-height: 1.8 !important;
   margin-bottom: 1.5rem !important;
   text-align: left !important;
@@ -224,26 +224,19 @@
 }
 
 // ! *** How It Works Section *** //
-.how-it-works-section {
-  width: 100%;
-  max-width: 1200px;
-  margin: 3rem 10em 2em 2em;
-}
-
-.section-title {
- font-family: 'Abril Fatface', sans-serif !important;
-  font-size: 4em !important;
-  text-align: center;
-  margin-bottom: 3rem !important;
-  color: rgb(32, 61, 160) !important;
-  margin-left: 2em !important;
-}
+// .how-it-works-section {
+//   padding-top: 12em;
+//   background: linear-gradient(0deg, rgb(32, 63, 140) 0%, #06b6d4 70%);
+//   width: 100%;
+//   // max-width: 1200px;
+// }
 
 .grid-layout-marketing {
+  margin: 2em;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
-  width: 100%;
+  // width: 100%;
   padding: 2rem !important;
   background: #ffffff96 !important;
 
@@ -265,7 +258,7 @@
   padding: 2rem 1rem;
   text-align: center;
   border-radius: 12px;
-  border: 2px solid rgba(161, 158, 158, 0.3);
+  // border: 2px solid rgba(161, 158, 158, 0.3);
   background: linear-gradient(
     135deg,
     rgba(62, 211, 222, 0.1),
@@ -305,30 +298,6 @@
   @media (max-width: 768px) {
     width: 4rem;
     height: 4rem;
-  }
-}
-
-.step-title {
-  color: rgb(32, 61, 160) !important;
-  font-size: 1.5rem !important;
-  font-weight: bold !important;
-  margin: 1rem 0 !important;
-
-  @media (max-width: 768px) {
-    font-size: 1.3rem !important;
-  }
-}
-
-.step-description {
-  width: 100%;
-  margin-top: 1rem !important;
-  padding: 1rem !important;
-  background-color: rgba(255, 255, 255, 0.7) !important;
-
-  p {
-    margin: 0;
-    font-size: 0.9rem;
-    line-height: 1.4;
   }
 }
 

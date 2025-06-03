@@ -93,6 +93,9 @@ export default function LandingPage() {
             </StyledButton>
           )}
         </Box>
+{/* Where I left off */}
+
+
         <Box className="cta_login_container">
           <Paper className="cta_login">
             <form onSubmit={handleSubmit(onSubmit)} className="signin-form">
@@ -148,9 +151,12 @@ export default function LandingPage() {
               >
                 {isLoading ? "Signing In..." : "Sign In"}
               </StyledButton>
+              
             </form>
           </Paper>
         </Box>
+
+        {/* Last Part I left off */}
       </Box>
       <hr className="section-divider-two" />
 
