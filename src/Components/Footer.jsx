@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, TextField, Button} from "@mui/material";
 import { GitHub, LinkedIn, Person } from "@mui/icons-material";
 import { StyledContainer } from "../Styling/theme";
 import { useForm } from "react-hook-form";
@@ -63,8 +63,9 @@ export default function Footer() {
         <Box className="footer_contact">
           <Typography className="contact_title">Get In Touch</Typography>
           <form className="contact_form" onSubmit={handleSubmit(onSubmit)}>
-            <input
+            <TextField
               type="text"
+              variant="outlined"
               placeholder="Your Name"
               className="contact_input"
               {...register("name", {
@@ -79,7 +80,7 @@ export default function Footer() {
               <span className="error_message">{errors.name.message}</span>
             )}
 
-            <input
+            <TextField
               type="email"
               placeholder="Your Email"
               className="contact_input"
@@ -95,7 +96,7 @@ export default function Footer() {
               <span className="error_message">{errors.email.message}</span>
             )}
 
-            <textarea
+            <TextField
               placeholder="Your Message"
               className="contact_input contact_textarea"
               {...register("message", {
@@ -110,9 +111,9 @@ export default function Footer() {
               <span className="error_message">{errors.message.message}</span>
             )}
 
-            <button type="submit" className="contact_button">
+            <Button type="submit" className="contact_button">
               Send Message
-            </button>
+            </Button>
           </form>
         </Box>
       </Box>

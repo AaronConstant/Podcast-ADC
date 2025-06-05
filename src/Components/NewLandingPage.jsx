@@ -18,6 +18,7 @@ import CCPRepeat from "../assets/CCPIconRepeat.png";
 import CPRLogo from "../assets/CPR.png";
 import CCPFooterLogo from "../assets/CCPFooterPhoto.png";
 import newLandingVideo from "../assets/NewLandingPageAssets/newccpcta.mp4";
+import vidnextlogin from "../assets/vidnextlogin.mp4";
 
 export default function NewLandingPage() {
   const { isAuthenticated, user, login } = useAuth();
@@ -67,13 +68,12 @@ export default function NewLandingPage() {
     <div className="newLandingPage_container">
       <Box className="ctaVideo_container">
         <video
+          className="newLandingPage_cta_video"
           src={newLandingVideo}
           type="video/mp4"
-          className="newLandingPage_cta_video"
           autoPlay
           muted
           playsInline
-          
         >
           Your browser does not support the video tag.
         </video>
@@ -151,7 +151,6 @@ export default function NewLandingPage() {
               Start Creating Now 🎧
             </StyledButton>
           </Box>
-
           {/* Order of Operations */}
         </Container>
       </Box>
@@ -235,15 +234,23 @@ export default function NewLandingPage() {
           </Box>
         </Paper>
       </Box>
-      <StyledTypography className="cta_login_title" component="h2">
-        Familiar Face? New Case? Jump Back In!
+      <StyledTypography className="cta_login_title">
+        Back again? Got something new? We're glad to see YOU!
       </StyledTypography>
       <Box className="cta_login_container">
-                  <StyledTypography component="h2" className="cta_login_heading">Returning to the scene of the Crime?</StyledTypography>
+        <Box>
+          <video
+            className="video_next_login"
+            src={vidnextlogin}
+            type="video/mp4"
+            autoPlay
+            muted
+            playsInline
+            loop
+          ></video>
+        </Box>
 
         <Paper className="cta_login">
-          <form onSubmit={handleSubmit(onSubmit)} className="signin-form">
-            <div className="form-field cta_login_input">
               <Box
                 className="logo_pic"
                 component="img"
@@ -251,11 +258,13 @@ export default function NewLandingPage() {
                 alt="Chit Chat Logo"
                 loading="eager"
               />
+          <form onSubmit={handleSubmit(onSubmit)} className="signin-form">
+            <div className="form-field">
               <TextField
                 label="Username or Email"
                 variant="outlined"
                 fullWidth
-                className="signin-input"
+                className="signin-input cta_login_input"
                 {...register("username", {
                   required: "Username or email is required",
                   minLength: {
