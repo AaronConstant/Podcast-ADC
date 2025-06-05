@@ -31,7 +31,7 @@ import {
 import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext";
 // import Loading from "../Loading";
-import '../../Styling/UserDashboardStyling.scss'
+import "../../Styling/UserDashboardStyling.scss";
 const API = import.meta.env.VITE_BASE_URL;
 
 const PodcastDashboard = () => {
@@ -121,17 +121,16 @@ const PodcastDashboard = () => {
       if (response.status === 200) {
         const audioUrl = URL.createObjectURL(response.data);
         setAudioUrl(audioUrl);
-        
+
         // Create new podcast entry with mood from form data
         const newPodcast = {
-          id: Date.now(), // temporary ID
           title: currentScript?.title || "Untitled Podcast",
           description: currentScript?.description || "No description",
-          mood: watch("mood"), // Get mood from current form data
+          mood: watch("mood"),
           createdAt: new Date().toLocaleDateString(),
-          audio_url: audioUrl
+          audio_url: audioUrl,
         };
-        
+
         setPodcastEntries((prev) => [newPodcast, ...prev]);
       }
     } catch (err) {
@@ -157,7 +156,6 @@ const PodcastDashboard = () => {
 
   const formData = watch();
 
-  // Parse script data and set text when currentScript changes
   useEffect(() => {
     if (currentScript) {
       const scriptString = `
@@ -171,7 +169,6 @@ const PodcastDashboard = () => {
     }
   }, [currentScript]);
 
-  // Fetch podcast entries on component mount
   useEffect(() => {
     const fetchPodcastEntries = async () => {
       try {
@@ -189,7 +186,7 @@ const PodcastDashboard = () => {
         console.error("Error fetching podcast entries:", error);
       }
     };
-    
+
     fetchPodcastEntries();
 
     const timer = setTimeout(() => {
@@ -245,8 +242,7 @@ const PodcastDashboard = () => {
                         required: "Podcast topic is required",
                         minLength: {
                           value: 10,
-                          message:
-                            "Topic must be at least 10 characters long",
+                          message: "Topic must be at least 10 characters long",
                         },
                       })}
                       error={!!errors.prompt}
@@ -293,9 +289,15 @@ const PodcastDashboard = () => {
                     size="large"
                     disabled={isLoading}
                     className="submit-button"
-                    startIcon={isLoading ? <CircularProgress size={20} color="inherit" /> : null}
-                    >
-                      {isLoading ? 'Creating Script...' : 'Generate Podcast Script'}
+                    startIcon={
+                      isLoading ? (
+                        <CircularProgress size={20} color="inherit" />
+                      ) : null
+                    }
+                  >
+                    {isLoading
+                      ? "Creating Script..."
+                      : "Generate Podcast Script"}
                   </Button>
                 </Box>
               )}
@@ -306,9 +308,7 @@ const PodcastDashboard = () => {
                     <Typography variant="h5" className="script-title">
                       Your Script is Ready!
                     </Typography>
-                    <Badge className="mood-badge">
-                      Mood: {formData.mood}
-                    </Badge>
+                    <Badge className="mood-badge">Mood: {formData.mood}</Badge>
                   </Box>
 
                   <Paper className="script-content">
@@ -319,10 +319,7 @@ const PodcastDashboard = () => {
                             key.slice(1).replace(/([A-Z])/g, " $1")}
                           :
                         </Typography>
-                        <Typography
-                          variant="body1"
-                          className="section-content"
-                        >
+                        <Typography variant="body1" className="section-content">
                           {value}
                         </Typography>
                       </Box>
@@ -363,7 +360,7 @@ const PodcastDashboard = () => {
             </CardContent>
           </Card>
 
-          {/* Right Side - Podcast Library */}
+          {/* Podcast Library */}
           <Card className="card">
             <CardHeader
               className="card-header library-header"
