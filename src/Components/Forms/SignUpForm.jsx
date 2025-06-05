@@ -76,7 +76,7 @@ export default function SignUp() {
       setUser(user);
 
       setTimeout(() => {
-        navigate(`/users/${user.id}/dashboard`);
+        navigate(`/users/${user.id}/userdashboard`);
       }, [3000]);
     } catch (error) {
       console.error("Error creating user:", error);
