@@ -41,7 +41,6 @@ export function AuthProvider({ children }) {
         localStorage.setItem("user", JSON.stringify(user));
         setUser(user);
         console.log("Login successful");
-
         return { success: true, user };
       }
     } catch (error) {

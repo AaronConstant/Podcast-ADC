@@ -1,0 +1,290 @@
+// Main container
+.podcast-dashboard {
+  min-height: 100vh;
+  background-image: url("../assets/Dashboardbackground.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+}
+
+// Header styles
+.header {
+  background: linear-gradient(135deg,rgb(29, 58, 138) 30%, rgba(93, 237, 245, 1) 100%);
+  color: white;
+  padding: 48px 0;
+  text-align: center;
+}
+
+.header-title {
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.header-subtitle {
+  opacity: 0.9;
+}
+
+// Main content grid
+.main-content {
+  padding: 32px 0;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: start;
+
+  @media (min-width: 1200px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+// Card styles
+.card {
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.card-header {
+  background: linear-gradient(135deg,rgb(29, 58, 138) 30%, rgba(93, 237, 245, 1) 100%);
+  color: white;
+
+  &.library-header {
+  background: linear-gradient(135deg,rgb(29, 58, 138) 30%, rgba(93, 237, 245, 1) 100%);
+  }
+}
+
+.card-header-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-content {
+  padding: 32px;
+}
+
+// Form styles
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-field {
+  margin-bottom: 8px;
+
+  .field-label {
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .text-field {
+    border-radius: 8px;
+  }
+
+  .select-field {
+    border-radius: 8px;
+  }
+}
+
+.submit-button {
+  background: linear-gradient(135deg,rgba(93, 237, 245, 1)30%,rgb(29, 58, 138) 100%);
+  padding: 16px 0;
+  font-size: 1.1rem;
+  margin-top: 16px;
+  border-radius: 12px;
+  text-transform: none;
+  font-weight: 600;
+}
+
+// Script display styles
+.script-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.script-header {
+  text-align: center;
+
+  .script-title {
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+
+  .mood-badge {
+    background-color: teal;
+    color: white;
+    padding: 4px 16px;
+    border-radius: 8px;
+  }
+}
+
+.script-content {
+  padding: 24px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+  border: 2px solid blue;
+  border-radius: 8px;
+
+  .script-section {
+    margin-bottom: 16px;
+
+    .section-title {
+      color: black;
+      margin-bottom: 8px;
+    }
+
+    .section-content {
+      line-height: 1.6;
+    }
+  }
+}
+
+.script-actions {
+  display: flex;
+  gap: 16px;
+
+  .convert-button {
+    flex: 1;
+    background: linear-gradient(135deg, #4caf50 0%, white 100%);
+  }
+
+  .back-button {
+    border-color: black;
+  }
+}
+
+// Audio conversion styles
+.audio-loading {
+  text-align: center;
+  padding: 48px 0;
+
+  .loading-title {
+    margin-bottom: 8px;
+  }
+
+  .loading-subtitle {
+    color: lightcoral;
+  }
+}
+
+// Podcast library styles
+.library-content {
+  padding: 32px;
+}
+
+.empty-library {
+  text-align: center;
+  padding: 48px 0;
+  color: lightcoral;
+
+  .empty-icon {
+    font-size: 80px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+  }
+
+  .empty-title {
+    margin-bottom: 8px;
+  }
+}
+
+.library-list {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.podcast-accordion {
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+  border: 1px solid blue;
+  border-radius: 8px;
+
+  &::before {
+    display: none;
+  }
+}
+
+.podcast-header {
+  .podcast-title {
+    font-weight: bold;
+  }
+
+  .podcast-badges {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+
+      &.mood-badge {
+        background-color: teal;
+        color: white;
+      }
+
+      &.date-badge {
+        background-color: blue;
+        color: white;
+      }
+    }
+  }
+}
+
+.podcast-details {
+  .podcast-description {
+    margin-bottom: 16px;
+    color: lightcoral;
+  }
+
+  .audio-player {
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: white;
+    border-radius: 8px;
+
+    audio {
+      width: 100%;
+    }
+  }
+
+  .podcast-actions {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+// Button styles
+.button {
+  border-radius: 12px;
+  text-transform: none;
+  font-weight: 600;
+}
+
+// Responsive utilities
+@media (max-width: 600px) {
+  .header {
+    padding: 32px 0;
+  }
+
+  .main-content {
+    padding: 16px 0;
+  }
+
+  .card-content,
+  .library-content {
+    padding: 16px;
+  }
+
+  .content-grid {
+    gap: 16px;
+  }
+}

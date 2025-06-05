@@ -41,7 +41,7 @@ export default function NewLandingPage() {
     try {
       const result = await login(loginInfo);
       if (result.success) {
-        navigate(`/users/${result.user.id}/dashboard`);
+        navigate(`/users/${result.user.id}/userdashboard`);
       } else {
         setError(result.error || "Failed to Sign in. Try Again Please :(");
       }
