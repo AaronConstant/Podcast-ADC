@@ -9,7 +9,7 @@ import Contact from "./Components/Contact";
 import Footer from "./Components/Footer";
 import NewLandingPage from "./Components/NewLandingPage";
 // import NewUserDashboard from './Components/Users/NewUserDashboard'
-import MockDashboard from './Components/Users/MockDashboard'
+import UserDashboard from './Components/Users/UserDashboard'
 
 export default function Apps() {
 
@@ -17,7 +17,7 @@ export default function Apps() {
     <>
       <NavBar />
       <Routes>
-        < Route path='/users/:id/mockdashboard'element={<MockDashboard/>}/>
+        < Route path='/users/:id/userdashboard'element={<UserDashboard/>}/>
         {/* <Route path="/users/:id/userdashboard" element={<NewUserDashboard />} /> */}
         <Route path="/login" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />

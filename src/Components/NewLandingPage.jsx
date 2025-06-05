@@ -146,7 +146,7 @@ export default function NewLandingPage() {
               size="large"
               className="cta-button"
               LinkComponent={Link}
-              to={isAuthenticated ? `/users/${user.id}/dashboard` : "/signup"}
+              to={isAuthenticated ? `/users/${user.id}/userdashboard` : "/signup"}
             >
               Start Creating Now 🎧
             </StyledButton>

@@ -32,7 +32,7 @@ export default function SignIn() {
     try {
       const result = await login(loginInfo)
       if(result.success) {
-        navigate(`/users/${result.user.id}/mockdashboard`);
+        navigate(`/users/${result.user.id}/userdashboard`);
       } else {
         setError(result.error || "Failed to Sign in. Try Again Please :(")
       }

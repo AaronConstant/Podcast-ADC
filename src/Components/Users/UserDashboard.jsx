@@ -31,7 +31,7 @@ import {
 import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext";
 // import Loading from "../Loading";
-import '../../Styling/MockDashboardStyling.scss'
+import '../../Styling/UserDashboardStyling.scss'
 const API = import.meta.env.VITE_BASE_URL;
 
 const PodcastDashboard = () => {

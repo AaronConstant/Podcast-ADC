@@ -74,7 +74,7 @@ export default function NavBar() {
             <>
               <StyledButton
                 LinkComponent={Link}
-                to={`/users/${user.id}/dashboard`}
+                to={`/users/${user.id}/userdashboard`}
                 fullWidth
               >
                 Dashboard
@@ -166,7 +166,7 @@ export default function NavBar() {
                   <>
                     <StyledButton
                       LinkComponent={Link}
-                      to={`/users/${user.id}/dashboard`}
+                      to={`/users/${user.id}/userdashboard`}
                       sx={{ padding: "0.4em 2em " }}
                       fullWidth
                     >
